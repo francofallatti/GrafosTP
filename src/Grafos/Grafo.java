@@ -20,7 +20,7 @@ public class Grafo {
 		verifDistintos(i, j);
 		verifVertice(i);
 		verifVertice(j);
-		
+
 		_listaDeVecinos.get(i).add(j);
 		_listaDeVecinos.get(j).add(i);
 	}
@@ -38,20 +38,20 @@ public class Grafo {
 		verifDistintos(i, j);
 		verifVertice(i);
 		verifVertice(j);
-		
+
 		return _listaDeVecinos.get(i).contains(j);
 	}
-	
-	//cant de vertices
+
+	// cant de vertices
 	public int tamano() {
 		return _listaDeVecinos.size();
 	}
-	
-	//vecinos de un vertice
-	public Set<Integer> vecinos(int i){
+
+	// vecinos de un vertice
+	public Set<Integer> getVecinos(int i) {
 		return _listaDeVecinos.get(i);
 	}
-	
+
 	// Exepciones
 	private void verifDistintos(int i, int j) {
 		if (i == j) {
