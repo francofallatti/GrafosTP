@@ -3,6 +3,8 @@ package Interface;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,6 +66,12 @@ public class MainInterface {
 		frame.getContentPane().add(lblTitulo2);
 		
 		JButton btnJugar = new JButton("Jugar!");
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CargarGrafo cargarGrafo = new CargarGrafo(true);
+				frame.setVisible(false);
+			}
+		});
 		btnJugar.setBounds(167, 184, 89, 23);
 		frame.getContentPane().add(btnJugar);
 	}
