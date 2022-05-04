@@ -7,6 +7,11 @@ public class AGMinimo extends GrafoConPeso {
 	public AGMinimo(int n) {
 		super(n);
 	}
+	/*
+	public static AGMinimo kruskal(GrafoConPeso g) {
+
+	}
+	*/
 
 	public static AGMinimo prim(GrafoConPeso g) {
 		double[][] matrizInicial = g.getMatrizConPesos();
