@@ -1,33 +1,31 @@
 package Grafos;
 
-import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 public class AGMinimo extends GrafoConPeso {
-
+	
 	public AGMinimo(int n) {
 		super(n);
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
-		AGMinimo ret = new AGMinimo(g.tamano());
-		Set<Integer> visitados = new HashSet<Integer>();
-		//elijo un vertice al azar
-		Integer vertice = new Random().nextInt(g.tamano());
-		Integer verticeSig = 0;
-		visitados.add(vertice);
-		double aristaDeMenorPeso = 2;
-		int i = 1;
-		while(i < g.tamano()) {
-			for (Integer vecino : g.getVecinos(vertice)) {
-				if(!visitados.contains(vecino) && g.getPesosDeAristas(vertice)[vecino] < aristaDeMenorPeso) {
-					aristaDeMenorPeso = g.getPesosDeAristas(vertice)[vecino];
-					verticeSig = vecino;
+		double[][] matrizInicial = g.getMatrizConPesos();
+		Integer tamaño = matrizInicial.length-1;
+		AGMinimo ret = new AGMinimo(tamaño);
+		
+		for (int i = 1; i <= matrizInicial.length ; i++) {	//recorro los vértices
+			Set<Integer> vecinos = g.getVecinos(i);
+			Double aristaMin = Double.MAX_VALUE;
+			Integer j = 0;
+			for (Integer vecino : vecinos) {	//recorro los vecinos del vértice i
+				if (matrizInicial[i][vecino] < aristaMin && !(BFS.alcanzables(ret, i).contains(vecino))) {
+					aristaMin = matrizInicial[i][vecino];
+					j = vecino;
 				}
 			}
-			visitados.add(verticeSig);
+			
+			ret.agregarArista(i, j);
 		}
-		i++;
+		return ret;
 	}
 }
