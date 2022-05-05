@@ -23,7 +23,7 @@ public class AGMinimo extends GrafoConPeso {
 			Double aristaMin = Double.MAX_VALUE;
 			Integer j = 0;
 			for (Integer vecino : vecinos) {	//recorro los vecinos del vértice i
-				if (matrizInicial[i][vecino] < aristaMin && !(BFS.alcanzables(ret, i).contains(vecino))) {
+				if (matrizInicial[i][vecino] < aristaMin) {
 					aristaMin = matrizInicial[i][vecino];
 					j = vecino;
 				}
