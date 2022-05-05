@@ -21,6 +21,10 @@ public class GrafoConPeso extends Grafo {
 		*/
 	}
 	
+	public GrafoConPeso() {
+		super();
+	}
+	
 	public void agregarPesoArista(double peso, int i, int j) {
 		if(super.existeArista(i, j)) {
 			matrizConPesos[i][j] = peso;
