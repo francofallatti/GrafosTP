@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import Main.Juego;
+
 import javax.swing.JButton;
 
 public class MainInterface {
@@ -68,6 +71,7 @@ public class MainInterface {
 		JButton btnJugar = new JButton("Jugar!");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Juego juego = new Juego();
 				CargarGrafo cargarGrafo = new CargarGrafo(true);
 				frame.setVisible(false);
 			}

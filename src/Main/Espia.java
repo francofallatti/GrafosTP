@@ -1,5 +1,6 @@
 package Main;
 
+
 public class Espia {
 	private String espia;
 	private Boolean tieneMensaje;
@@ -12,4 +13,8 @@ public class Espia {
 		return tieneMensaje;
 	}
 
+	public String getNombre() {
+		return espia;
+	}
+	
 }
