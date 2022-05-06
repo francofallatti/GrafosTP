@@ -123,6 +123,7 @@ public class CargarGrafo {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
 					System.out.println("Espias a encontrarse: " + Juego.getEspias());
+					//Juego.agregarEncuentro(0.1 comboBox.);
 					
 				}
 			}
