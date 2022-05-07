@@ -95,6 +95,10 @@ public class CargarGrafo {
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnGuardar.setBounds(211, 186, 131, 23);
 		frame.getContentPane().add(btnGuardar);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds(211, 220, 131, 23);
+		frame.getContentPane().add(btnFinalizar);
 
 		// functions
 		btnCargar.addActionListener(new ActionListener() {
@@ -122,20 +126,19 @@ public class CargarGrafo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
-					System.out.println("Espias a encontrarse: " + Juego.getEspias());
-					//Juego.agregarEncuentro(0.1 comboBox.);
-					
+					System.out.println("Espias: " + Juego.getEspias());
+					Juego.agregarEncuentro(0.1, comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
+					System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
 				}
 			}
 		});
-
-	}
-
-	private JComboBox<String> InsertarItem(JComboBox CB) {
-		for (Espia s : Juego.getEspias()) {
-			CB.addItem(s);
-		}
-		return CB;
+		
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
+				frame.setVisible(false);
+			}
+		});
 
 	}
 }

@@ -3,23 +3,28 @@ package Main;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
+
+import javax.swing.Spring;
 
 import Grafos.AGMinimo;
 import Grafos.GrafoConPeso;
 
 public class Juego {
-	private static Set<Espia> espias;
+	private static Map<String,Espia> espias;
 	private static Map<Espia, Integer> espia_NumeroDeVertice;
 	private String mensaje;
 	private static GrafoConPeso grafoEspias;
 	private AGMinimo juego;
 
 	public Juego() {
-		espias = new HashSet<Espia>();
+		espias = new HashMap<String,Espia>();
 		mensaje = "Este es un mensaje para los espías";
 		grafoEspias = new GrafoConPeso();
 		espia_NumeroDeVertice = new HashMap<Espia, Integer>();
+		Random randomObj = new Random();
+		double randomDbl = randomObj.nextDouble();
 	}
 
 	public void jugar() {
@@ -32,23 +37,22 @@ public class Juego {
 		} else {
 			Espia nuevo = new Espia(nombreEspia);
 			espia_NumeroDeVertice.put(nuevo, espia_NumeroDeVertice.size());
-			espias.add(nuevo);
+			espias.put(nombreEspia, nuevo);
 			grafoEspias.agregarVertice();
-
 		}
+		
 	}
-
-	public void agregarEncuentro(Double probabilidadIntercepcion, Espia espia1, Espia espia2) {
-		grafoEspias.agregarArista(espia_NumeroDeVertice.get(espia1), espia_NumeroDeVertice.get(espia2));
-		grafoEspias.agregarPesoArista(probabilidadIntercepcion, espia_NumeroDeVertice.get(espia1),
-				espia_NumeroDeVertice.get(espia2));
+	public static void agregarEncuentro(Double probabilidadIntercepcion, String espia1, String espia2) {
+		grafoEspias.agregarArista(espia_NumeroDeVertice.get(espias.get(espia1)), espia_NumeroDeVertice.get(espias.get(espia2)));
+		grafoEspias.agregarPesoArista(probabilidadIntercepcion, espia_NumeroDeVertice.get(espias.get(espia1)),
+				espia_NumeroDeVertice.get(espias.get(espia2)));
 	}
 
 	public boolean puedenEncontrarse(Espia espia1, Espia espia2) {
 		return grafoEspias.existeArista(espia_NumeroDeVertice.get(espia1), espia_NumeroDeVertice.get(espia2));
 	}
 
-	public static Set<Espia> getEspias() {
+	public static Map<String,Espia> getEspias() {
 		return espias;
 	}
 }
