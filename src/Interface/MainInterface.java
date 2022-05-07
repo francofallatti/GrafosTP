@@ -72,7 +72,7 @@ public class MainInterface {
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Juego juego = new Juego();
-				CargarGrafo cargarGrafo = new CargarGrafo(true);
+				CargarGrafo cargarGrafo = new CargarGrafo(true,juego);
 				frame.setVisible(false);
 			}
 		});

@@ -23,6 +23,7 @@ public class CargarGrafo {
 
 	private JFrame frame;
 	private JTextField nombreEspia;
+	private Juego juego;
 
 	/**
 	 * Launch the application.
@@ -43,8 +44,9 @@ public class CargarGrafo {
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
-	public CargarGrafo(boolean b) {
+	public CargarGrafo(boolean b, Juego j) {
 		initialize(b);
+		juego = j;
 	}
 
 	/**
@@ -84,10 +86,10 @@ public class CargarGrafo {
 		lblEspiasAEncontrarse.setBounds(20, 106, 181, 14);
 		frame.getContentPane().add(lblEspiasAEncontrarse);
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(211, 103, 131, 20);
 		frame.getContentPane().add(comboBox);
-		JComboBox comboBox2 = new JComboBox();
+		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(211, 141, 131, 20);
 		frame.getContentPane().add(comboBox2);
 
@@ -106,7 +108,7 @@ public class CargarGrafo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource()==btnCargar && !nombreEspia.getText().isEmpty()) {
-					Juego.agregarEspia(nombreEspia.getText());
+					juego.agregarEspia(nombreEspia.getText());
 					System.out.println(nombreEspia.getText());
 					comboBox.addItem(nombreEspia.getText());
 					comboBox2.addItem(nombreEspia.getText());
@@ -126,8 +128,8 @@ public class CargarGrafo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
-					System.out.println("Espias: " + Juego.getEspias());
-					Juego.agregarEncuentro(0.1, comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
+					System.out.println("Espias: " + juego.getEspias());
+					juego.agregarEncuentro(0.1, comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
 					System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
 				}
 			}
@@ -135,7 +137,7 @@ public class CargarGrafo {
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
+				//ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
 				frame.setVisible(false);
 			}
 		});

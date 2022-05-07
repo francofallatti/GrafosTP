@@ -1,21 +1,17 @@
 package Main;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-
-import javax.swing.Spring;
 
 import Grafos.AGMinimo;
 import Grafos.GrafoConPeso;
 
 public class Juego {
-	private static Map<String,Espia> espias;
-	private static Map<Espia, Integer> espia_NumeroDeVertice;
+	private Map<String,Espia> espias;
+	private Map<Espia, Integer> espia_NumeroDeVertice;
 	private String mensaje;
-	private static GrafoConPeso grafoEspias;
+	private GrafoConPeso grafoEspias;
 	private AGMinimo juego;
 
 	public Juego() {
@@ -31,7 +27,7 @@ public class Juego {
 		juego = AGMinimo.prim(grafoEspias);
 	}
 
-	public static void agregarEspia(String nombreEspia) {
+	public void agregarEspia(String nombreEspia) {
 		if (nombreEspia == null || nombreEspia == "") {
 			throw new IllegalArgumentException("Se espera el nombre de un espia");
 		} else {
@@ -42,7 +38,7 @@ public class Juego {
 		}
 		
 	}
-	public static void agregarEncuentro(Double probabilidadIntercepcion, String espia1, String espia2) {
+	public void agregarEncuentro(Double probabilidadIntercepcion, String espia1, String espia2) {
 		grafoEspias.agregarArista(espia_NumeroDeVertice.get(espias.get(espia1)), espia_NumeroDeVertice.get(espias.get(espia2)));
 		grafoEspias.agregarPesoArista(probabilidadIntercepcion, espia_NumeroDeVertice.get(espias.get(espia1)),
 				espia_NumeroDeVertice.get(espias.get(espia2)));
@@ -52,7 +48,7 @@ public class Juego {
 		return grafoEspias.existeArista(espia_NumeroDeVertice.get(espia1), espia_NumeroDeVertice.get(espia2));
 	}
 
-	public static Map<String,Espia> getEspias() {
+	public Map<String,Espia> getEspias() {
 		return espias;
 	}
 }
