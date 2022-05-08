@@ -19,9 +19,10 @@ import javax.swing.JToggleButton;
 import Main.Espia;
 import Main.Juego;
 
-public class CargarGrafo {
+public class NombreEspias {
 
 	private JFrame frame;
+	private JTextField nombreEspia;
 	private Juego juego;
 
 	/**
@@ -43,7 +44,7 @@ public class CargarGrafo {
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
-	public CargarGrafo(boolean b, Juego j) {
+	public NombreEspias(boolean b, Juego j) {
 		initialize(b);
 		juego = j;
 	}
@@ -59,48 +60,54 @@ public class CargarGrafo {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JLabel lblEspiasAEncontrarse = new JLabel("Espias a encontrarse:");
-		lblEspiasAEncontrarse.setForeground(Color.WHITE);
-		lblEspiasAEncontrarse.setBackground(Color.WHITE);
-		lblEspiasAEncontrarse.setFont(new Font("Joystix", Font.PLAIN, 12));
-		lblEspiasAEncontrarse.setBounds(20, 106, 181, 14);
-		frame.getContentPane().add(lblEspiasAEncontrarse);
+		JLabel lblNDeLosEspias = new JLabel("Nombre de los espias:");
+		lblNDeLosEspias.setForeground(Color.WHITE);
+		lblNDeLosEspias.setBackground(Color.WHITE);
+		lblNDeLosEspias.setFont(new Font("Joystix", Font.PLAIN, 12));
+		lblNDeLosEspias.setBounds(20, 47, 181, 14);
+		frame.getContentPane().add(lblNDeLosEspias);
 
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(211, 103, 131, 20);
-		frame.getContentPane().add(comboBox);
-		comboBox.setSelectedItem(juego.getEspiasKey());
-		
-		JComboBox<String> comboBox2 = new JComboBox<String>();
-		comboBox2.setBounds(211, 141, 131, 20);
-		frame.getContentPane().add(comboBox2);
-		comboBox2.setSelectedItem(juego.getEspiasKey());
+		JButton btnCargar = new JButton("Cargar");
 
-		JButton btnGuardar = new JButton("Guardar Encuentro");
-		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnGuardar.setBounds(211, 186, 131, 23);
-		frame.getContentPane().add(btnGuardar);
+		nombreEspia = new JTextField(); // captura los nombres de los espias
+
+		nombreEspia.setBounds(211, 45, 131, 20);
+		frame.getContentPane().add(nombreEspia);
+		nombreEspia.setColumns(10);
+
+		btnCargar.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCargar.setBounds(352, 44, 72, 23);
+		frame.getContentPane().add(btnCargar);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setBounds(211, 220, 131, 23);
 		frame.getContentPane().add(btnFinalizar);
 
-		btnGuardar.addActionListener(new ActionListener() {
+		// functions
+		btnCargar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == btnGuardar) {
-					System.out.println("Espias: " + juego.getEspias());
-					juego.agregarEncuentro(0.1, comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
-					System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
+				if (e.getSource()==btnCargar && !nombreEspia.getText().isEmpty()) {
+					juego.agregarEspia(nombreEspia.getText());
+					System.out.println(nombreEspia.getText());
 				}
+				borrar();
+
 			}
+
+			public void borrar() {
+				nombreEspia.setText(null);
+			}
+
 		});
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
+				CargarGrafo cargarGrafo = new CargarGrafo(true, juego);
 				frame.setVisible(false);
+				
 			}
 		});
 

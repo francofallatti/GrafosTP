@@ -1,8 +1,10 @@
 package Main;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import Grafos.AGMinimo;
 import Grafos.GrafoConPeso;
@@ -50,5 +52,8 @@ public class Juego {
 
 	public Map<String,Espia> getEspias() {
 		return espias;
+	}
+	public Set<String> getEspiasKey() {
+		return espias.keySet();
 	}
 }
