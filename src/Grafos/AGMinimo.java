@@ -20,7 +20,7 @@ public class AGMinimo extends GrafoConPeso {
 			Integer j = 0;
 			for (Integer vecino : vecinos) {
 				Set<Integer> alcanzables = BFS.alcanzables(g, i);
-				if (Et > matrizInicial[i][vecino] && alcanzables.contains(i) && !g.mismaComponente(g, i, vecino.intValue())) {// si hay ciclo
+				if (Et > matrizInicial[i][vecino] && alcanzables.contains(i) ) {// si hay ciclo
 					Et = matrizInicial[i][vecino];// ET := ET or {e}
 					j = vecino;
 				}

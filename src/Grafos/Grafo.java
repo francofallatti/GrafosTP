@@ -72,12 +72,4 @@ public class Grafo {
 			throw new IllegalArgumentException("Los vertices deben estar entre 0 y |V|-1: " + i);
 		}
 	}
-
-	public int padre(int i) {
-		if(i==padre(i)) {//si estoy en la raiz
-			return i; //devuelve el padre
-		}else {
-			return padre(padre(i));//else a terminar;
-		}
-	}
 }

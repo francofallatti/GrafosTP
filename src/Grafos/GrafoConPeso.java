@@ -50,10 +50,5 @@ public class GrafoConPeso extends Grafo {
 		return matrizConPesos[i];
 	}
 
-	public boolean mismaComponente(Grafo g, int i, int vecino) {
-		if(g.padre(i)==g.padre(vecino)){
-			return true;
-		}
-		return false;
-	}
+	
 }
