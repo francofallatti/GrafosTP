@@ -45,6 +45,7 @@ public class CargarGrafo {
 	 */
 	public CargarGrafo(boolean b, Juego j) {
 		juego = j;
+		juego.cargarEncuentros();
 		initialize(b);
 	}
 

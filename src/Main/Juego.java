@@ -19,7 +19,6 @@ public class Juego {
 	private Juego() {
 		espias = new HashMap<String,Espia>();
 		mensaje = "Este es un mensaje para los espías";
-		grafoEspias = new GrafoConPeso();
 		espia_NumeroDeVertice = new HashMap<Espia, Integer>();
 		Random randomObj = new Random();
 		double randomDbl = randomObj.nextDouble();
@@ -33,6 +32,10 @@ public class Juego {
 	public void jugar() {
 		juego = AGMinimo.prim(grafoEspias);
 	}
+	
+	public void cargarEncuentros() {
+		grafoEspias = new GrafoConPeso(espias.size());
+	}
 
 	public void agregarEspia(String nombreEspia) {
 		if (nombreEspia == null || nombreEspia == "") {
@@ -41,7 +44,6 @@ public class Juego {
 			Espia nuevo = new Espia(nombreEspia);
 			espia_NumeroDeVertice.put(nuevo, espia_NumeroDeVertice.size());
 			espias.put(nombreEspia, nuevo);
-			grafoEspias.agregarVertice();
 		}
 		
 	}
