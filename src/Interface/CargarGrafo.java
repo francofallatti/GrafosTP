@@ -69,15 +69,15 @@ public class CargarGrafo {
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(211, 103, 131, 20);
 		frame.getContentPane().add(comboBox);
-		String[] arr = (String[]) juego.getEspiasKey().toArray();
-		comboBox.setModel(new DefaultComboBoxModel<String>(arr));
-		//comboBox.setSelectedItem(juego.getEspiasKey());
+		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
+		espias.addAll(juego.getEspiasKey());
+		comboBox.setModel(espias);
 		
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(211, 141, 131, 20);
 		frame.getContentPane().add(comboBox2);
-		comboBox2.setModel(new DefaultComboBoxModel<String>(arr));
-		//comboBox2.setSelectedItem(juego.getEspiasKey());
+		comboBox2.setModel(espias);
+	
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
