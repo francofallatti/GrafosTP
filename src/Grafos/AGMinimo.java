@@ -30,16 +30,6 @@ public class AGMinimo extends GrafoConPeso {
 		} // i := i + 1
 		return ret;// retornar T = (V, Et )
 	}
-/**
-	private boolean hayCiclo() {
-		if(aux==null) {
-			return false;
-		}
-		if(!g.mismaComponente(g, i, vecino.intValue()){
-			return false;
-		}
-		return true;
-	}**/
 
 	public static AGMinimo prim(GrafoConPeso g) {
 		double[][] matrizInicial = g.getMatrizConPesos();

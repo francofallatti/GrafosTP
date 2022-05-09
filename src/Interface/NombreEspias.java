@@ -24,7 +24,8 @@ public class NombreEspias {
 	private JFrame frame;
 	private JTextField nombreEspia;
 	private Juego juego;
-
+	private CargarGrafo cargarGrafo;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,8 +46,9 @@ public class NombreEspias {
 	 * @wbp.parser.entryPoint
 	 */
 	public NombreEspias(boolean b, Juego j) {
-		initialize(b);
 		juego = j;
+		initialize(b);
+		//cargarGrafo = cg;
 	}
 
 	/**
@@ -105,9 +107,10 @@ public class NombreEspias {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
-				CargarGrafo cargarGrafo = new CargarGrafo(true, juego);
+				//cargarGrafo.getFrame().setVisible(true);
+				//frame.setVisible(false);
+				CargarGrafo cg = new CargarGrafo(true, juego);
 				frame.setVisible(false);
-				
 			}
 		});
 

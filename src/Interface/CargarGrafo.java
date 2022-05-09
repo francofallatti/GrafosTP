@@ -44,8 +44,8 @@ public class CargarGrafo {
 	 * @wbp.parser.entryPoint
 	 */
 	public CargarGrafo(boolean b, Juego j) {
-		initialize(b);
 		juego = j;
+		initialize(b);
 	}
 
 	/**
@@ -69,12 +69,15 @@ public class CargarGrafo {
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(211, 103, 131, 20);
 		frame.getContentPane().add(comboBox);
-		comboBox.setSelectedItem(juego.getEspiasKey());
+		String[] arr = (String[]) juego.getEspiasKey().toArray();
+		comboBox.setModel(new DefaultComboBoxModel<String>(arr));
+		//comboBox.setSelectedItem(juego.getEspiasKey());
 		
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(211, 141, 131, 20);
 		frame.getContentPane().add(comboBox2);
-		comboBox2.setSelectedItem(juego.getEspiasKey());
+		comboBox2.setModel(new DefaultComboBoxModel<String>(arr));
+		//comboBox2.setSelectedItem(juego.getEspiasKey());
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -104,5 +107,9 @@ public class CargarGrafo {
 			}
 		});
 
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 }

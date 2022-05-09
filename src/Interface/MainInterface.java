@@ -71,7 +71,8 @@ public class MainInterface {
 		JButton btnJugar = new JButton("Jugar!");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Juego juego = new Juego();
+				Juego juego = Juego.iniciarJuego();
+				//CargarGrafo cg = new CargarGrafo(false, juego);
 				NombreEspias nombreEspias = new NombreEspias(true,juego);
 				frame.setVisible(false);
 			}

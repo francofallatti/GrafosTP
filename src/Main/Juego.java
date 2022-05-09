@@ -16,13 +16,18 @@ public class Juego {
 	private GrafoConPeso grafoEspias;
 	private AGMinimo juego;
 
-	public Juego() {
+	private Juego() {
 		espias = new HashMap<String,Espia>();
 		mensaje = "Este es un mensaje para los espías";
 		grafoEspias = new GrafoConPeso();
 		espia_NumeroDeVertice = new HashMap<Espia, Integer>();
 		Random randomObj = new Random();
 		double randomDbl = randomObj.nextDouble();
+	}
+	
+	public static Juego iniciarJuego() {
+		Juego juego = new Juego();
+		return juego;
 	}
 
 	public void jugar() {
