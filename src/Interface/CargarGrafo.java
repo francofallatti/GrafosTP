@@ -15,9 +15,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SpinnerModel;
 
 import Main.Espia;
 import Main.Juego;
+import javax.swing.JSpinner;
+import javax.swing.JSlider;
+import javax.swing.JScrollBar;
+import javax.swing.SpinnerNumberModel;
 
 public class CargarGrafo {
 
@@ -63,19 +68,19 @@ public class CargarGrafo {
 		JLabel lblEspiasAEncontrarse = new JLabel("Espias a encontrarse:");
 		lblEspiasAEncontrarse.setForeground(Color.WHITE);
 		lblEspiasAEncontrarse.setBackground(Color.WHITE);
-		lblEspiasAEncontrarse.setFont(new Font("Joystix", Font.PLAIN, 12));
-		lblEspiasAEncontrarse.setBounds(20, 106, 181, 14);
+		lblEspiasAEncontrarse.setFont(new Font("Joystix", Font.PLAIN, 11));
+		lblEspiasAEncontrarse.setBounds(21, 39, 181, 14);
 		frame.getContentPane().add(lblEspiasAEncontrarse);
 
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(211, 103, 131, 20);
+		comboBox.setBounds(247, 36, 131, 20);
 		frame.getContentPane().add(comboBox);
 		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
 		espias.addAll(juego.getEspiasKey());
 		comboBox.setModel(espias);
 		
 		JComboBox<String> comboBox2 = new JComboBox<String>();
-		comboBox2.setBounds(211, 141, 131, 20);
+		comboBox2.setBounds(247, 67, 131, 20);
 		frame.getContentPane().add(comboBox2);
 		DefaultComboBoxModel<String> espias2 = new DefaultComboBoxModel<String>();
 		espias2.addAll(juego.getEspiasKey());
@@ -84,12 +89,25 @@ public class CargarGrafo {
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnGuardar.setBounds(211, 186, 131, 23);
+		btnGuardar.setBounds(247, 166, 131, 23);
 		frame.getContentPane().add(btnGuardar);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
-		btnFinalizar.setBounds(211, 220, 131, 23);
+		btnFinalizar.setBounds(150, 200, 131, 23);
 		frame.getContentPane().add(btnFinalizar);
+
+		
+		JLabel lblProbabilidadDeIntercepcion = new JLabel("probabilidad de intercepcion:");
+		lblProbabilidadDeIntercepcion.setForeground(Color.WHITE);
+		lblProbabilidadDeIntercepcion.setFont(new Font("Joystix", Font.PLAIN, 11));
+		lblProbabilidadDeIntercepcion.setBackground(Color.WHITE);
+		lblProbabilidadDeIntercepcion.setBounds(20, 102, 217, 14);
+		frame.getContentPane().add(lblProbabilidadDeIntercepcion);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
+		spinner.setBounds(247, 99, 131, 20);
+		frame.getContentPane().add(spinner);
 
 		btnGuardar.addActionListener(new ActionListener() {
 
