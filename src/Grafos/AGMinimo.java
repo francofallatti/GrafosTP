@@ -48,6 +48,7 @@ public class AGMinimo extends GrafoConPeso {
 			System.out.println(i);
 			System.out.println(j);
 			ret.agregarArista(i, j);
+			ret.agregarPesoArista(aristaMin, i, j);
 		}
 		return ret;
 	}

@@ -42,7 +42,7 @@ public class ResultadosInterface {
 	 */
 	private void initialize(boolean b) {
 		frame = new JFrame();
-		frame.getContentPane().setForeground(Color.WHITE);
+		frame.setVisible(b);
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +54,8 @@ public class ResultadosInterface {
 		lblNewLabel.setBounds(163, 11, 87, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel(resultado.getMatrizConPesos().toString());
+		System.out.println(resultado.toString());
+		JLabel lblNewLabel_1 = new JLabel(resultado.toString());
 		lblNewLabel_1.setBounds(180, 64, 46, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		

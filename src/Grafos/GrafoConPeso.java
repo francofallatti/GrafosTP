@@ -25,13 +25,16 @@ public class GrafoConPeso extends Grafo {
 		super();
 	}
 	
-	public void imprimirMatriz() {
+	@Override
+	public String toString() {
+		StringBuffer ret = new StringBuffer();
 		for(int i = 0; i < matrizConPesos.length; i++) {
 			for(int j = 0; j < matrizConPesos[i].length; j++) {
-				System.out.print(matrizConPesos[i][j] + " ");
+				ret.append((matrizConPesos[i][j] + " "));
 			}
-			System.out.println("\n");
+			ret.append("\n");
 		}
+		return ret.toString();
 	}
 	
 	public void agregarPesoArista(double peso, int i, int j) {
