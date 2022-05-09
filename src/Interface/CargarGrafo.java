@@ -115,8 +115,9 @@ public class CargarGrafo {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
 					System.out.println("Espias: " + juego.getEspias());
-					juego.agregarEncuentro(0.1, comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
+					juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
 					System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
+					juego.getgrafo().imprimirMatriz();
 				}
 			}
 		});

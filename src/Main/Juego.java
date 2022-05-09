@@ -33,6 +33,10 @@ public class Juego {
 		juego = AGMinimo.prim(grafoEspias);
 	}
 	
+	public GrafoConPeso getgrafo() {
+		return grafoEspias;
+	}
+	
 	public void cargarEncuentros() {
 		grafoEspias = new GrafoConPeso(espias.size());
 	}
