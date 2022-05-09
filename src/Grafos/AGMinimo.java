@@ -32,10 +32,10 @@ public class AGMinimo extends GrafoConPeso {
 
 	public static AGMinimo prim(GrafoConPeso g) {
 		double[][] matrizInicial = g.getMatrizConPesos();
-		Integer tamaño = matrizInicial.length - 1;
+		Integer tamaño = g.tamano();
 		AGMinimo ret = new AGMinimo(tamaño);
 
-		for (int i = 1; i <= matrizInicial.length; i++) { // recorro los vértices
+		for (int i = 0; i < matrizInicial.length; i++) { // recorro los vértices
 			Set<Integer> vecinos = g.getVecinos(i);
 			Double aristaMin = Double.MAX_VALUE;
 			Integer j = 0;
@@ -45,7 +45,8 @@ public class AGMinimo extends GrafoConPeso {
 					j = vecino;
 				}
 			}
-
+			System.out.println(i);
+			System.out.println(j);
 			ret.agregarArista(i, j);
 		}
 		return ret;
