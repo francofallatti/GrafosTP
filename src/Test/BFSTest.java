@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import Test.Assert;
+import Test.Asserts;
 import Grafos.BFS;
 import Grafos.Grafo;
 
@@ -41,7 +41,7 @@ public class BFSTest {
 	public void alcanzablesTest() {
 		Grafo g = inicializarGrafo();
 		Set<Integer> alcanzables = BFS.alcanzables(g,0);
-		Assert.iguales(new int[] {0,1,2,3}, alcanzables);
+		Asserts.iguales(new int[] {0,1,2,3}, alcanzables);
 	}
 	
 	private Grafo inicializarGrafo() {

@@ -59,5 +59,7 @@ public class GrafoConPeso extends Grafo {
 		return matrizConPesos[i];
 	}
 
-	
+	public double getPesoDeAristas(int i,int j) {
+		return matrizConPesos[i][j];
+	}
 }

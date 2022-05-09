@@ -40,6 +40,10 @@ public class GrafosTest {
 	public void segundoVerticeExcedidoTest() {
 		grafo.agregarArista(2, 5);
 	}
+	@Test(expected = IllegalArgumentException.class)
+	public void VerifDIstintodTest() {
+		grafo.agregarArista(2, 2);
+	}
 
 	@Test
 	public void aristaOpuestaTest() {
