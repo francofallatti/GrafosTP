@@ -76,7 +76,9 @@ public class CargarGrafo {
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(211, 141, 131, 20);
 		frame.getContentPane().add(comboBox2);
-		comboBox2.setModel(espias);
+		DefaultComboBoxModel<String> espias2 = new DefaultComboBoxModel<String>();
+		espias2.addAll(juego.getEspiasKey());
+		comboBox2.setModel(espias2);
 	
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
