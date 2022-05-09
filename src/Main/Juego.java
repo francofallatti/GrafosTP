@@ -20,8 +20,6 @@ public class Juego {
 		espias = new HashMap<String,Espia>();
 		mensaje = "Este es un mensaje para los espías";
 		espia_NumeroDeVertice = new HashMap<Espia, Integer>();
-		Random randomObj = new Random();
-		double randomDbl = randomObj.nextDouble();
 	}
 	
 	public static Juego iniciarJuego() {
@@ -29,12 +27,9 @@ public class Juego {
 		return juego;
 	}
 
-	public void jugar() {
+	public AGMinimo jugar() {
 		juego = AGMinimo.prim(grafoEspias);
-	}
-	
-	public GrafoConPeso getgrafo() {
-		return grafoEspias;
+		return juego;
 	}
 	
 	public void cargarEncuentros() {
@@ -64,7 +59,12 @@ public class Juego {
 	public Map<String,Espia> getEspias() {
 		return espias;
 	}
+	
 	public Set<String> getEspiasKey() {
 		return espias.keySet();
+	}
+	
+	public GrafoConPeso getGrafo() {
+		return grafoEspias;
 	}
 }

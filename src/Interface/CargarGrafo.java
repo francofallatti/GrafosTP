@@ -25,6 +25,8 @@ import javax.swing.JSlider;
 import javax.swing.JScrollBar;
 import javax.swing.SpinnerNumberModel;
 
+import Grafos.AGMinimo;
+
 public class CargarGrafo {
 
 	private JFrame frame;
@@ -117,19 +119,20 @@ public class CargarGrafo {
 				if (e.getSource() == btnGuardar) {
 					System.out.println("Espias: " + juego.getEspias());
 					if(comboBox.getSelectedItem().toString().equals(comboBox2.getSelectedItem().toString())) {
-						JOptionPane.showMessageDialog(frame, "Los espias deben ser diferentes", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "Los espías deben ser diferentes!", "Error", JOptionPane.ERROR_MESSAGE);
 					} else {
 						juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
 						System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
 					}
-					juego.getgrafo().imprimirMatriz();
+					juego.getGrafo().imprimirMatriz();
 				}
 			}
 		});
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
+				AGMinimo resultado = juego.jugar();
+				ResultadosInterface ri = new ResultadosInterface(true, resultado);
 				frame.setVisible(false);
 			}
 		});
