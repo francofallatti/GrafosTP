@@ -72,7 +72,7 @@ public class MainInterface {
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Juego juego = Juego.iniciarJuego();
-				NombreEspias nombreEspias = new NombreEspias(true,juego);
+				CargarEspias nombreEspias = new CargarEspias(true,juego);
 				frame.setVisible(false);
 			}
 		});

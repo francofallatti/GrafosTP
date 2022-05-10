@@ -79,16 +79,15 @@ public class CargarGrafo {
 		comboBox.setBounds(151, 49, 131, 20);
 		frame.getContentPane().add(comboBox);
 		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
-		espias.addAll(juego.getEspiasKey());
+		espias.addAll(juego.getNombreEspias());
 		comboBox.setModel(espias);
 		
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(151, 80, 131, 20);
 		frame.getContentPane().add(comboBox2);
 		DefaultComboBoxModel<String> espias2 = new DefaultComboBoxModel<String>();
-		espias2.addAll(juego.getEspiasKey());
+		espias2.addAll(juego.getNombreEspias());
 		comboBox2.setModel(espias2);
-	
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -99,7 +98,6 @@ public class CargarGrafo {
 		btnFinalizar.setBounds(293, 227, 131, 23);
 		frame.getContentPane().add(btnFinalizar);
 
-		
 		JLabel lblProbabilidadDeIntercepcion = new JLabel("probabilidad de intercepcion:");
 		lblProbabilidadDeIntercepcion.setForeground(Color.WHITE);
 		lblProbabilidadDeIntercepcion.setFont(new Font("Joystix", Font.PLAIN, 11));

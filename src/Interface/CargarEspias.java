@@ -19,7 +19,7 @@ import javax.swing.JToggleButton;
 import Main.Espia;
 import Main.Juego;
 
-public class NombreEspias {
+public class CargarEspias {
 
 	private JFrame frame;
 	private JTextField nombreEspia;
@@ -44,10 +44,9 @@ public class NombreEspias {
 	 * 
 	 * @wbp.parser.entryPoint
 	 */
-	public NombreEspias(boolean b, Juego j) {
+	public CargarEspias(boolean b, Juego j) {
 		juego = j;
 		initialize(b);
-		//cargarGrafo = cg;
 	}
 
 	/**

@@ -50,17 +50,14 @@ public class Grafo {
 		return _listaDeVecinos.get(i).contains(j);
 	}
 
-	// cant de vertices
 	public int tamano() {
 		return _listaDeVecinos.size();
 	}
 
-	// vecinos de un vertice
 	public Set<Integer> getVecinos(int i) {
 		return _listaDeVecinos.get(i);
 	}
 
-	// Exepciones
 	private void verifDistintos(int i, int j) {
 		if (i == j) {
 			throw new IllegalArgumentException("Los Vertices tienen que ser distintos " + i + "=" + j);
