@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
@@ -70,6 +71,17 @@ public class Juego {
 		Espia e = new Espia(espia);
 		return espia_NumeroDeVertice.get(e);
 	}
+	
+	public String getNombreEspia(int i) {
+	    for(Entry<Espia, Integer> entry: espia_NumeroDeVertice.entrySet()) {
+	      if(entry.getValue() == i) {
+	        return entry.getKey().getNombre();
+	      }
+	    }
+		return "";
+	  }
+	
+	
 	
 	public Set<String> getEspiasKey() {
 		return espias.keySet();
