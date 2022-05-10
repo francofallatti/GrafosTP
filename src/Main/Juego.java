@@ -2,6 +2,7 @@ package Main;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -12,6 +13,7 @@ import Grafos.GrafoConPeso;
 public class Juego {
 	private Map<String,Espia> espias;
 	private Map<Espia, Integer> espia_NumeroDeVertice;
+
 	private String mensaje;
 	private GrafoConPeso grafoEspias;
 	private AGMinimo juego;
@@ -30,6 +32,10 @@ public class Juego {
 	public AGMinimo jugar() {
 		juego = AGMinimo.prim(grafoEspias);
 		return juego;
+	}
+	
+	public Double getProbabilidadIntercepcion(int i, int j) {
+		return juego.getMatrizConPesos()[i][j];
 	}
 	
 	public void cargarEncuentros() {
@@ -58,6 +64,11 @@ public class Juego {
 
 	public Map<String,Espia> getEspias() {
 		return espias;
+	}
+	
+	public Integer numeroVertice(String espia) {
+		Espia e = new Espia(espia);
+		return espia_NumeroDeVertice.get(e);
 	}
 	
 	public Set<String> getEspiasKey() {

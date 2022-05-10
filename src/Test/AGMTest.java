@@ -1,7 +1,5 @@
 package Test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +17,6 @@ public class AGMTest {
 	public void ImprimirTest() {
 		agm.agregarArista(1, 0);
 		agm.agregarPesoArista(0.3, 1,0);
-		agm.imprimirMatriz();
 	}
 	@Test
 	public void PrimTest() {

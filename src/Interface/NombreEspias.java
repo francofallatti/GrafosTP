@@ -24,7 +24,6 @@ public class NombreEspias {
 	private JFrame frame;
 	private JTextField nombreEspia;
 	private Juego juego;
-	private CargarGrafo cargarGrafo;
 	
 	/**
 	 * Launch the application.

@@ -124,7 +124,6 @@ public class CargarGrafo {
 						juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
 						System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
 					}
-					//juego.getGrafo().imprimirMatriz();
 				}
 			}
 		});

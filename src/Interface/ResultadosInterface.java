@@ -8,11 +8,16 @@ import Grafos.AGMinimo;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.Set;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ResultadosInterface {
 
 	private JFrame frame;
 	private AGMinimo resultado;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -54,12 +59,26 @@ public class ResultadosInterface {
 		lblNewLabel.setBounds(163, 11, 87, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
+		table_1 = new JTable();
+		table_1.setBounds(62, 42, 299, 164);
+		frame.getContentPane().add(table_1);
+		DefaultTableModel model = new DefaultTableModel();
+		for(Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
+			model.addColumn(i);
+		}
+		
+		for(Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
+			for(Integer j = 0; j < resultado.getMatrizConPesos().length; j++) {
+				if(resultado.existeArista(i, j)) {
+					model.addRow(new Object[] {i, j, resultado.getMatrizConPesos()[i][j]});
+				} else {
+					model.addRow(new Object[] {i, j, 0});
+				}
+			}
+		}
+		table_1.setModel(model);
 		System.out.println(resultado.toString());
-		JLabel lblNewLabel_1 = new JLabel(resultado.toString());
-		lblNewLabel_1.setBounds(180, 64, 46, 14);
-		frame.getContentPane().add(lblNewLabel_1);
 		
 		
 	}
-
 }

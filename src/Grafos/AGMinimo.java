@@ -1,6 +1,5 @@
 package Grafos;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class AGMinimo extends GrafoConPeso {
@@ -9,6 +8,42 @@ public class AGMinimo extends GrafoConPeso {
 		super(n);
 	}
 
+	public static AGMinimo prim(GrafoConPeso g) {
+		double[][] matrizInicial = g.getMatrizConPesos();
+		Integer tamaño = g.tamano();
+		AGMinimo ret = new AGMinimo(tamaño);
+		boolean[] visitados = new boolean[tamaño];
+		visitados[0] = true;
+		for (int i = 0; i < matrizInicial.length; i++) { // recorro los vértices
+			Set<Integer> vecinos = g.getVecinos(i);
+			Double aristaMin = Double.MAX_VALUE;
+			Integer j = 0;
+			if(visitados[i] == true) {
+				for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
+					if (matrizInicial[i][vecino] < aristaMin && visitados[vecino] == false) {
+						aristaMin = matrizInicial[i][vecino];
+						j = vecino;
+					}
+				}
+			}
+			if(visitados[i] == false) {
+				for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
+					if (matrizInicial[i][vecino] < aristaMin && visitados[vecino] == true) {
+						aristaMin = matrizInicial[i][vecino];
+						j = vecino;
+					}
+				}
+			}
+			System.out.println(i);
+			System.out.println(j);
+			visitados[j] = true;
+			ret.agregarArista(i, j);
+			ret.agregarPesoArista(aristaMin, i, j);
+		}
+		return ret;
+	}
+	
+	/*
 	public static AGMinimo kruskal(GrafoConPeso g) {
 		double[][] matrizInicial = g.getMatrizConPesos();
 		AGMinimo ret = new AGMinimo(matrizInicial.length);
@@ -29,27 +64,5 @@ public class AGMinimo extends GrafoConPeso {
 		} // i := i + 1
 		return ret;// retornar T = (V, Et )
 	}
-
-	public static AGMinimo prim(GrafoConPeso g) {
-		double[][] matrizInicial = g.getMatrizConPesos();
-		Integer tamaño = g.tamano();
-		AGMinimo ret = new AGMinimo(tamaño);
-
-		for (int i = 0; i < matrizInicial.length; i++) { // recorro los vértices
-			Set<Integer> vecinos = g.getVecinos(i);
-			Double aristaMin = Double.MAX_VALUE;
-			Integer j = 0;
-			for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
-				if (matrizInicial[i][vecino] < aristaMin) {
-					aristaMin = matrizInicial[i][vecino];
-					j = vecino;
-				}
-			}
-			System.out.println(i);
-			System.out.println(j);
-			ret.agregarArista(i, j);
-			ret.agregarPesoArista(aristaMin, i, j);
-		}
-		return ret;
-	}
+	*/
 }
