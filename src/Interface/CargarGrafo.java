@@ -132,7 +132,7 @@ public class CargarGrafo {
 			public void actionPerformed(ActionEvent e) {
 				AGMinimo resultado = juego.jugar();
 				System.out.println(resultado.toString());
-				ResultadosInterface ri = new ResultadosInterface(true, resultado);
+				ResultadosInterface ri = new ResultadosInterface(true, resultado,juego);
 				frame.setVisible(false);
 			}
 		});
