@@ -81,7 +81,7 @@ public class CargarGrafo {
 		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
 		espias.addAll(juego.getNombreEspias());
 		comboBox.setModel(espias);
-		
+
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setBounds(151, 80, 131, 20);
 		frame.getContentPane().add(comboBox2);
@@ -93,7 +93,7 @@ public class CargarGrafo {
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnGuardar.setBounds(151, 193, 131, 23);
 		frame.getContentPane().add(btnGuardar);
-		
+
 		JButton btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setBounds(293, 227, 131, 23);
 		frame.getContentPane().add(btnFinalizar);
@@ -104,9 +104,9 @@ public class CargarGrafo {
 		lblProbabilidadDeIntercepcion.setBackground(Color.WHITE);
 		lblProbabilidadDeIntercepcion.setBounds(111, 137, 217, 14);
 		frame.getContentPane().add(lblProbabilidadDeIntercepcion);
-		
+
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 15.0, 0.1));
+		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1, 0.1));
 		spinner.setBounds(151, 162, 131, 20);
 		frame.getContentPane().add(spinner);
 
@@ -116,21 +116,24 @@ public class CargarGrafo {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
 					System.out.println("Espias: " + juego.getEspias());
-					if(comboBox.getSelectedItem().toString().equals(comboBox2.getSelectedItem().toString())) {
-						JOptionPane.showMessageDialog(frame, "Los espías deben ser diferentes!", "Error", JOptionPane.ERROR_MESSAGE);
+					if (comboBox.getSelectedItem().toString().equals(comboBox2.getSelectedItem().toString())) {
+						JOptionPane.showMessageDialog(frame, "Los espías deben ser diferentes!", "Error",
+								JOptionPane.ERROR_MESSAGE);
 					} else {
-						juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(), comboBox2.getSelectedItem().toString());
-						System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"+ comboBox2.getSelectedItem().toString());
+						juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(),
+								comboBox2.getSelectedItem().toString());
+						System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"
+								+ comboBox2.getSelectedItem().toString());
 					}
 				}
 			}
 		});
-		
+
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AGMinimo resultado = juego.jugar();
 				System.out.println(resultado.toString());
-				ResultadosInterface ri = new ResultadosInterface(true, resultado,juego);
+				ResultadosInterface ri = new ResultadosInterface(true, resultado, juego);
 				frame.setVisible(false);
 			}
 		});

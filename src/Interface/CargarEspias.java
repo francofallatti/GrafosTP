@@ -104,9 +104,6 @@ public class CargarEspias {
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ImprimirGrafo imprimirGrafo = new ImprimirGrafo(true);
-				//cargarGrafo.getFrame().setVisible(true);
-				//frame.setVisible(false);
 				CargarGrafo cg = new CargarGrafo(true, juego);
 				frame.setVisible(false);
 			}
