@@ -8,6 +8,7 @@ public class Espia {
 	
 	public Espia(String nombre) {
 		this.espia = nombre;
+		this.tieneMensaje=false;
 	}
 	
 	public void recibirMensaje(String mensajeRecibido) {

@@ -28,10 +28,14 @@ public class JuegoTest {
 		espia2 = new Espia("Espia1");
 		
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void agregarEspiasErrorTest() {
+		juego.agregarEspia(null);
+		juego.agregarEspia("");
+	}
 	@Test
 	public void puedenEncontrarseTest() {
-		espia1 = new Espia("Espia1");
-		espia2 = new Espia("Espia1");
 		assertFalse(juego.puedenEncontrarse(espia1, espia2));
 	}
 	
@@ -40,6 +44,8 @@ public class JuegoTest {
 		Juego juego2 = juego.iniciarJuego();
 		assertEquals(juego2.getEspias(), null);
 	}
+	
+	
 	
 	@Test
 	public void getEspiasKeyTest() {
