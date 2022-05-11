@@ -23,7 +23,7 @@ public class BFS {
 
 	}
 
-	public List<List<Integer>> recorrido(AGMinimo g, int origen) {
+	public static List<List<Integer>> recorrido(AGMinimo g, int origen) {
 		List<List<Integer>> recorrido = new ArrayList<List<Integer>>(); // voy poniendo los vertices en orden de recorrido
 
 		// inicializar
@@ -37,23 +37,23 @@ public class BFS {
 			//ret.add(i);
 			List<Integer> lista = new LinkedList<Integer>();
 			lista.add(i);
-			recorrido.add(lista);
+			
 
 			// Agregar a L todos los vecinos no marcados de i;
 			agregarVecinosNoMarcadosOrdenados(g, i, lista);
-
+			recorrido.add(lista);
 			L.remove(0);// L := L\{i};;
 		}
 		return recorrido;
 	}
 	
 	private static void agregarVecinosNoMarcadosOrdenados(AGMinimo g, int i, List<Integer> lista) {
-		lista.add(g.vecinosOrdenados(i).get(0));
 		for (int vertice : g.vecinosOrdenados(i)) {
 			if (marcados[vertice] == false && L.contains(vertice) == false) {
 				L.add(vertice);
 			}
 		}
+		lista.add(L.get(1));
 	}
 
 	public static Set<Integer> alcanzables(Grafo g, int origen) {

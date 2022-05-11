@@ -47,10 +47,12 @@ public class GrafoConPeso extends Grafo {
 	public List<Integer> vecinosOrdenados(Integer i){
 		List<Integer> ret = new LinkedList<Integer>();
 		Set<Integer> vecinos = getVecinos(i);
-		ret.add(null);
 		for(Integer vecino : vecinos) {
+			if(ret.size() == 0) {
+				ret.add(vecino);
+			}
 			for(int vecinoOrdenado = 0; vecinoOrdenado < ret.size(); vecinoOrdenado++) {
-				if(matrizConPesos[i][vecino] < matrizConPesos[i][ret.get(vecinoOrdenado)] || ret.get(vecinoOrdenado) == null) {
+				if(matrizConPesos[i][vecino] < matrizConPesos[i][ret.get(vecinoOrdenado)]) {
 					ret.add(vecinoOrdenado, vecino);
 				}
 			}

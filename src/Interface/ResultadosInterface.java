@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import Grafos.AGMinimo;
+import Grafos.BFS;
 import Main.Juego;
 
 import java.awt.BorderLayout;
@@ -82,17 +83,26 @@ public class ResultadosInterface {
 			model.addColumn("Mensaje Entregado");
 		//}
 
+		List<List<Integer>> encuentros = BFS.recorrido(resultado, 0);
+		for(Integer i = 0; i < encuentros.size(); i++) {
+			Object[] encuentro = new Object[3];
+			for(Integer j = 0; j < 2; j++) {
+				 encuentro[j] = juego.getNombreEspia(encuentros.get(i).get(j));
+			}
+			encuentro[2] = resultado.getMatrizConPesos()[encuentros.get(i).get(0)][encuentros.get(i).get(1)];
+			model.addRow(encuentro);
+		}
+		/*	
 		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
-			for (Integer j = 1; j < resultado.getMatrizConPesos().length; j++) {
-				if (i != j) {
-					if (resultado.existeArista(i, j)) {
+			for (Integer j = 0; j < resultado.getMatrizConPesos().length; j++) {
+					if (i != j && resultado.existeArista(i, j)) {
 						model.addRow(new Object[] {juego.getNombreEspia(i) , juego.getNombreEspia(j), resultado.getMatrizConPesos()[i][j]});
 					} else {
 						model.addRow(new Object[] { juego.getNombreEspia(i), juego.getNombreEspia(j), 0 });
 					}
-				}
 			}
 		}
+		*/
 		table_1.setModel(model);
 		
 		table = new JTable();
@@ -101,6 +111,7 @@ public class ResultadosInterface {
 		DefaultTableModel model2 = new DefaultTableModel();
 		model2.addColumn("Espia");
 		model2.addColumn("Tiene mensaje");
+		
 		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
 			model2.addRow(new Object[] {juego.getNombreEspia(i) ,juego.mensajeEntregado(i)});
 			

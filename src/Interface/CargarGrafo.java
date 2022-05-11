@@ -106,7 +106,7 @@ public class CargarGrafo {
 		frame.getContentPane().add(lblProbabilidadDeIntercepcion);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1.0, 0.1));
+		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 15.0, 0.1));
 		spinner.setBounds(151, 162, 131, 20);
 		frame.getContentPane().add(spinner);
 
