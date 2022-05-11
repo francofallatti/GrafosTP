@@ -82,7 +82,7 @@ public class ResultadosInterface {
 			model.addColumn("Encuentro");
 			model.addColumn("Mensaje Entregado");
 		//}
-
+/*
 		List<List<Integer>> encuentros = BFS.recorrido(resultado, 0);
 		for(Integer i = 0; i < encuentros.size(); i++) {
 			Object[] encuentro = new Object[3];
@@ -92,7 +92,7 @@ public class ResultadosInterface {
 			encuentro[2] = resultado.getMatrizConPesos()[encuentros.get(i).get(0)][encuentros.get(i).get(1)];
 			model.addRow(encuentro);
 		}
-		/*	
+		*/
 		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
 			for (Integer j = 0; j < resultado.getMatrizConPesos().length; j++) {
 					if (i != j && resultado.existeArista(i, j)) {
@@ -102,7 +102,7 @@ public class ResultadosInterface {
 					}
 			}
 		}
-		*/
+		
 		table_1.setModel(model);
 		
 		table = new JTable();

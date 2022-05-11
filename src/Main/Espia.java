@@ -13,7 +13,9 @@ public class Espia {
 	
 	public void recibirMensaje(String mensajeRecibido) {
 		mensaje = mensajeRecibido;
-		tieneMensaje = true;
+		if(mensajeRecibido != null) {
+			tieneMensaje = true;
+		}
 	}
 	
 	public boolean tieneMensaje() {

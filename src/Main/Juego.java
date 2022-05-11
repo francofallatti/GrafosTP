@@ -1,11 +1,7 @@
 package Main;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 
 import Grafos.AGMinimo;
@@ -36,12 +32,13 @@ public class Juego {
 		numeroDeVertice_espia.get(0).recibirMensaje(mensaje);
 		for (int i = 0; i < juego.getMatrizConPesos().length; i++) {
 			for (int j = 1; j < juego.getMatrizConPesos().length; j++) {
-				if (i != j) {
-					if (juego.existeArista(i, j) && numeroDeVertice_espia.get(i).tieneMensaje()) {
-						numeroDeVertice_espia.get(j).recibirMensaje(mensaje);
-					}
-					if (juego.existeArista(i, j) && numeroDeVertice_espia.get(j).tieneMensaje()) {
-						numeroDeVertice_espia.get(i).recibirMensaje(mensaje);
+				if (i != j && juego.existeArista(i, j)) {
+					if (juego.getMatrizConPesos()[i][j] > 0.7) {
+						numeroDeVertice_espia.get(j).recibirMensaje(null);
+					} else {
+						if (numeroDeVertice_espia.get(i).tieneMensaje()) {
+							numeroDeVertice_espia.get(j).recibirMensaje(mensaje);
+						}
 					}
 				}
 			}
@@ -109,7 +106,7 @@ public class Juego {
 	}
 
 	public boolean mensajeEntregado(int i) {
-		if( numeroDeVertice_espia.get(i).tieneMensaje()==true ){
+		if(numeroDeVertice_espia.get(i).tieneMensaje()==true){
 			return true;
 		}
 		return false;
