@@ -34,13 +34,15 @@ public class Juego {
 	public AGMinimo jugar() {
 		juego = AGMinimo.prim(grafoEspias);
 		numeroDeVertice_espia.get(0).recibirMensaje(mensaje);
-		for (int i = 0 ; i < juego.getMatrizConPesos().length; i++) {
-			for(int j = 0; j < juego.getMatrizConPesos().length; j++) {
-				if(juego.existeArista(i, j) && numeroDeVertice_espia.get(i).tieneMensaje()) {
-					numeroDeVertice_espia.get(j).recibirMensaje(mensaje);
-				}
-				if(juego.existeArista(i, j) && numeroDeVertice_espia.get(j).tieneMensaje()) {
-					numeroDeVertice_espia.get(i).recibirMensaje(mensaje);
+		for (int i = 0; i < juego.getMatrizConPesos().length; i++) {
+			for (int j = 1; j < juego.getMatrizConPesos().length; j++) {
+				if (i != j) {
+					if (juego.existeArista(i, j) && numeroDeVertice_espia.get(i).tieneMensaje()) {
+						numeroDeVertice_espia.get(j).recibirMensaje(mensaje);
+					}
+					if (juego.existeArista(i, j) && numeroDeVertice_espia.get(j).tieneMensaje()) {
+						numeroDeVertice_espia.get(i).recibirMensaje(mensaje);
+					}
 				}
 			}
 		}
@@ -79,7 +81,7 @@ public class Juego {
 	}
 
 	public String getNombreEspia(Integer i) {
-		if(numeroDeVertice_espia.get(i) != null) {
+		if (numeroDeVertice_espia.get(i) != null) {
 			return numeroDeVertice_espia.get(i).getNombre();
 		} else {
 			throw new IllegalArgumentException("El espía no existe");
@@ -89,7 +91,7 @@ public class Juego {
 	public Set<String> getNombreEspias() {
 		return espias.keySet();
 	}
-	
+
 	public Set<Espia> getEspias() {
 		return espia_NumeroDeVertice.keySet();
 	}
@@ -100,5 +102,16 @@ public class Juego {
 
 	public Double getProbabilidadIntercepcion(int i, int j) {
 		return juego.getMatrizConPesos()[i][j];
+	}
+
+	public Espia getEspia(String s) {
+		return espias.get(s);
+	}
+
+	public boolean mensajeEntregado(int i) {
+		if( numeroDeVertice_espia.get(i).tieneMensaje()==true ){
+			return true;
+		}
+		return false;
 	}
 }

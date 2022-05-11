@@ -18,6 +18,7 @@ public class MainInterface {
 
 	private JFrame frame;
 	private JLabel lblTitulo;
+	
 
 	/**
 	 * Launch the application.

@@ -28,6 +28,7 @@ public class ResultadosInterface {
 	private AGMinimo resultado;
 	private Juego juego;
 	private JTable table_1;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -72,20 +73,20 @@ public class ResultadosInterface {
 		frame.getContentPane().add(lblNewLabel);
 
 		table_1 = new JTable();
-		table_1.setBounds(62, 42, 299, 164);
-		// frame.add(new JScrollPane(table_1), BorderLayout.CENTER);
+		table_1.setBounds(23, 42, 283, 183);
 		frame.getContentPane().add(table_1, BorderLayout.CENTER);
 		DefaultTableModel model = new DefaultTableModel();
-		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
-			model.addColumn(i);
-			System.out.println(i + "i");
-		}
+			model.addColumn("Espia");
+			model.addColumn("Espia");
+			model.addColumn("Encuentro");
+			model.addColumn("Mensaje Entregado");
+		//}
 
 		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
 			for (Integer j = 1; j < resultado.getMatrizConPesos().length; j++) {
 				if (i != j) {
 					if (resultado.existeArista(i, j)) {
-						model.addRow(new Object[] {juego.getNombreEspia(i) , juego.getNombreEspia(j), resultado.getMatrizConPesos()[i][j], });
+						model.addRow(new Object[] {juego.getNombreEspia(i) , juego.getNombreEspia(j), resultado.getMatrizConPesos()[i][j]});
 					} else {
 						model.addRow(new Object[] { juego.getNombreEspia(i), juego.getNombreEspia(j), 0 });
 					}
@@ -93,8 +94,19 @@ public class ResultadosInterface {
 			}
 		}
 		table_1.setModel(model);
+		
+		table = new JTable();
+		table.setBounds(320, 42, 104, 183);
+		frame.getContentPane().add(table);
+		DefaultTableModel model2 = new DefaultTableModel();
+		model2.addColumn("Espia");
+		model2.addColumn("Tiene mensaje");
+		for (Integer i = 0; i < resultado.getMatrizConPesos().length; i++) {
+			model2.addRow(new Object[] {juego.getNombreEspia(i) ,juego.mensajeEntregado(i)});
+			
+		}
+		table.setModel(model2);
 		System.out.println(resultado.toString());
 
 	}
-	
 }
