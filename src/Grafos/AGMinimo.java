@@ -1,11 +1,16 @@
 package Grafos;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class AGMinimo extends GrafoConPeso {
+	
+	private static List<Integer> recorrido;
 
 	public AGMinimo(int n) {
 		super(n);
+		recorrido = new LinkedList<Integer>();
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
@@ -25,6 +30,8 @@ public class AGMinimo extends GrafoConPeso {
 						j = vecino;
 					}
 				}
+				recorrido.add(i);
+				recorrido.add(j);
 			}
 			if(visitados[i] == false) {
 				for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
@@ -33,6 +40,8 @@ public class AGMinimo extends GrafoConPeso {
 						j = vecino;
 					}
 				}
+				recorrido.add(j);
+				recorrido.add(i);
 			}
 			System.out.println(i);
 			System.out.println(j);
@@ -42,6 +51,12 @@ public class AGMinimo extends GrafoConPeso {
 		}
 		return ret;
 	}
+
+	public static List<Integer> getRecorrido() {
+		return recorrido;
+	}
+	
+	
 	
 	/*
 	public static AGMinimo kruskal(GrafoConPeso g) {
