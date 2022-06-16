@@ -29,12 +29,12 @@ public class AGMinimo {
 	}
 
 	public static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados) {
-		if(vertVisitados.size() == g.tamano()-1) {
+		if(vertVisitados.size() == g.tamano()) {
 			return agm;
 		}
 		else {
 			Integer i = vertVisitados.size()-1;
-			Tupla<Double, Integer> aristaMin = g.dameAristaMin(i);
+			Tupla<Double, Integer> aristaMin = g.dameAristaMin(vertVisitados);
 			agm.agregarPesoArista(aristaMin.getE1(), i, aristaMin.getE2());
 			vertVisitados.add(aristaMin.getE2());
 			return prim(agm, g, vertVisitados);

@@ -61,6 +61,23 @@ public class GrafoConPeso extends Grafo {
 		}
 		return new Tupla<Double, Integer>(aristaMin, verticeAsociado);
 	}
+	
+	public boolean formaCiclo(int i, int j) {
+		return BFS.alcanzables(this, i).contains(j);
+	}
+	
+	public Tupla<Double, Integer> dameAristaMin(List<Integer> visitados) {
+			Integer n = 0;
+			while(n<visitados.size()) {
+				if(!visitados.contains(dameAristaMin(n).getE2())) {
+					n=visitados.size();
+					return dameAristaMin(n);
+				} else {
+					n++;
+				}
+			}
+		return null;
+	}
 
 	public double[][] getMatrizConPesos() {
 		return matrizConPesos;
