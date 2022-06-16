@@ -2,82 +2,43 @@ package Grafos;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
-public class AGMinimo extends GrafoConPeso {
+public class AGMinimo {
+
+	private GrafoConPeso grafo;
+	private Integer cantVertices;
+
+	private AGMinimo(GrafoConPeso g) {
+		grafo = new GrafoConPeso(g.tamano());
+		cantVertices = g.tamano();
+	}
+
+	public Integer cantVertices() {
+		return cantVertices;
+	}
 	
-	private static List<Integer> recorrido;
-
-	public AGMinimo(int n) {
-		super(n);
-		recorrido = new LinkedList<Integer>();
+	public void agregarPesoArista(double peso, int i, int j) {
+		grafo.agregarPesoArista(peso, i, j);
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
-		double[][] matrizInicial = g.getMatrizConPesos();
-		Integer tamaño = g.tamano();
-		AGMinimo ret = new AGMinimo(tamaño);
-		boolean[] visitados = new boolean[tamaño];
-		visitados[0] = true;
-		for (int i = 0; i < matrizInicial.length; i++) { // recorro los vértices
-			Set<Integer> vecinos = g.getVecinos(i);
-			Double aristaMin = Double.MAX_VALUE;
-			Integer j = 0;
-			if(visitados[i] == true) {
-				for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
-					if (matrizInicial[i][vecino] < aristaMin && visitados[vecino] == false) {
-						aristaMin = matrizInicial[i][vecino];
-						j = vecino;
-					}
-				}
-				recorrido.add(i);
-				recorrido.add(j);
-			}
-			if(visitados[i] == false) {
-				for (Integer vecino : vecinos) { // recorro los vecinos del vértice i
-					if (matrizInicial[i][vecino] < aristaMin && visitados[vecino] == true) {
-						aristaMin = matrizInicial[i][vecino];
-						j = vecino;
-					}
-				}
-				recorrido.add(j);
-				recorrido.add(i);
-			}
-			System.out.println(i);
-			System.out.println(j);
-			visitados[j] = true;
-			ret.agregarArista(i, j);
-			ret.agregarPesoArista(aristaMin, i, j);
-		}
-		return ret;
+		AGMinimo agm = new AGMinimo(g);
+		List<Integer> vertVisitados = new LinkedList<Integer>();
+		vertVisitados.add(0);
+		return prim(agm, g, vertVisitados);
 	}
 
-	public static List<Integer> getRecorrido() {
-		return recorrido;
+	public static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados) {
+		if(vertVisitados.size() == g.tamano()-1) {
+			return agm;
+		}
+		else {
+			Integer i = vertVisitados.size()-1;
+			Tupla<Double, Integer> aristaMin = g.dameAristaMin(i);
+			agm.agregarPesoArista(aristaMin.getE1(), i, aristaMin.getE2());
+			vertVisitados.add(aristaMin.getE2());
+			return prim(agm, g, vertVisitados);
+		}
 	}
-	
-	
-	
-	/*
-	public static AGMinimo kruskal(GrafoConPeso g) {
-		double[][] matrizInicial = g.getMatrizConPesos();
-		AGMinimo ret = new AGMinimo(matrizInicial.length);
-		double Et = Double.MAX_VALUE;// ET := ∅
-		Set<Integer> aux = new HashSet<Integer>();// aristas que ya est´an en Et
-		for (int i = 1; i < matrizInicial.length; i++) {// i := 1 mientras i ≤ n − 1 hacer
-			Set<Integer> vecinos = g.getVecinos(i);
-			Integer j = 0;
-			for (Integer vecino : vecinos) {
-				Set<Integer> alcanzables = BFS.alcanzables(g, i);
-				if (Et > matrizInicial[i][vecino] && alcanzables.contains(i) ) {// si hay ciclo
-					Et = matrizInicial[i][vecino];// ET := ET or {e}
-					j = vecino;
-				}
-			}
-			ret.agregarArista(i, j);
-			return ret;
-		} // i := i + 1
-		return ret;// retornar T = (V, Et )
-	}
-	*/
+
 }

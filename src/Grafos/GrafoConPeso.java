@@ -48,6 +48,19 @@ public class GrafoConPeso extends Grafo {
 		}
 		return ret.toString();
 	}
+	
+	public Tupla<Double, Integer> dameAristaMin(int i) {
+		Set<Integer> vecinos = getVecinos(i);
+		Double aristaMin = Double.MAX_VALUE;
+		Integer verticeAsociado = 0;
+		for(Integer v : vecinos) {
+			if(getPesoDeAristas(i, v)<aristaMin) {
+				aristaMin = getPesoDeAristas(i, v);
+				verticeAsociado = v;
+			}
+		}
+		return new Tupla<Double, Integer>(aristaMin, verticeAsociado);
+	}
 
 	public double[][] getMatrizConPesos() {
 		return matrizConPesos;
