@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import Grafos.AGMinimo;
-import Grafos.BFS;
 import Main.Juego;
 
 import java.awt.BorderLayout;

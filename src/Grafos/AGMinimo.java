@@ -5,12 +5,12 @@ import java.util.List;
 
 public class AGMinimo {
 
-	private GrafoConPeso grafo;
+	private GrafoConPeso agm;
 	private Integer cantVertices;
 
-	private AGMinimo(GrafoConPeso g) {
-		grafo = new GrafoConPeso(g.tamano());
-		cantVertices = g.tamano();
+	private AGMinimo(Integer cantVertices) {
+		this.agm = new GrafoConPeso(cantVertices);
+		this.cantVertices = cantVertices;
 	}
 
 	public Integer cantVertices() {
@@ -18,11 +18,11 @@ public class AGMinimo {
 	}
 	
 	public void agregarPesoArista(double peso, int i, int j) {
-		grafo.agregarPesoArista(peso, i, j);
+		agm.agregarPesoArista(peso, i, j);
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
-		AGMinimo agm = new AGMinimo(g);
+		AGMinimo agm = new AGMinimo(g.tamano());
 		List<Integer> vertVisitados = new LinkedList<Integer>();
 		vertVisitados.add(0);
 		return prim(agm, g, vertVisitados);
@@ -33,10 +33,14 @@ public class AGMinimo {
 			return agm;
 		}
 		else {
-			Integer i = vertVisitados.size()-1;
-			Tupla<Double, Integer> aristaMin = g.dameAristaMin(vertVisitados);
-			agm.agregarPesoArista(aristaMin.getE1(), i, aristaMin.getE2());
-			vertVisitados.add(aristaMin.getE2());
+			AristaConPeso aristaMin = g.dameAristaMin(vertVisitados);
+			agm.agregarPesoArista(aristaMin.getPeso(), aristaMin.getExtremo1(), aristaMin.getExtremo2());
+			if(!vertVisitados.contains(aristaMin.getExtremo1())) {
+				vertVisitados.add(aristaMin.getExtremo1());
+			}
+			if(!vertVisitados.contains(aristaMin.getExtremo2())) {
+				vertVisitados.add(aristaMin.getExtremo2());
+			}
 			return prim(agm, g, vertVisitados);
 		}
 	}

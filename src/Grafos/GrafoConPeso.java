@@ -6,18 +6,30 @@ import java.util.Set;
 
 public class GrafoConPeso extends Grafo {
 	private double[][] matrizConPesos;
+	private LinkedList<AristaConPeso> aristas;
 
 	public GrafoConPeso(int n) {
 		super(n);
 		matrizConPesos = new double[n][n];
+		aristas = new LinkedList<AristaConPeso>();
 	}
 
 	public void agregarPesoArista(double peso, int i, int j) {
 		if (super.existeArista(i, j)) {
 			matrizConPesos[i][j] = peso;
 			matrizConPesos[j][i] = peso;
+			aristas.add(new AristaConPeso(i,j,peso));
 		}
 
+	}
+	
+	private AristaConPeso getArista(int i, int j) {
+		for(AristaConPeso ap : aristas) {
+			if(ap.tieneUnExtremoEn(i) && ap.tieneUnExtremoEn(j)) {
+				return ap;
+			}
+		}
+		return null;
 	}
 
 	public List<Integer> vecinosOrdenados(Integer i) {
@@ -48,8 +60,7 @@ public class GrafoConPeso extends Grafo {
 		}
 		return ret.toString();
 	}
-	
-	public Tupla<Double, Integer> dameAristaMin(int i) {
+	public Integer dameAristaMin(int i) {	//retorna el vertice con arista minima con un extremo en i
 		Set<Integer> vecinos = getVecinos(i);
 		Double aristaMin = Double.MAX_VALUE;
 		Integer verticeAsociado = 0;
@@ -59,19 +70,15 @@ public class GrafoConPeso extends Grafo {
 				verticeAsociado = v;
 			}
 		}
-		return new Tupla<Double, Integer>(aristaMin, verticeAsociado);
+		return verticeAsociado;
 	}
 	
-	public boolean formaCiclo(int i, int j) {
-		return BFS.alcanzables(this, i).contains(j);
-	}
-	
-	public Tupla<Double, Integer> dameAristaMin(List<Integer> visitados) {
+	public AristaConPeso dameAristaMin(List<Integer> visitados) {
 			Integer n = 0;
 			while(n<visitados.size()) {
-				if(!visitados.contains(dameAristaMin(n).getE2())) {
+				if(!visitados.contains(dameAristaMin(visitados.get(n)))) {
 					n=visitados.size();
-					return dameAristaMin(n);
+					return getArista(visitados.get(n),dameAristaMin(visitados.get(n)));
 				} else {
 					n++;
 				}
