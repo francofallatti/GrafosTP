@@ -23,6 +23,10 @@ public class GrafoConPeso extends Grafo {
 
 	}
 	
+	public List<AristaConPeso> getAristas(){
+		return aristas;
+	}
+	
 	private AristaConPeso getArista(int i, int j) {
 		for(AristaConPeso ap : aristas) {
 			if(ap.tieneUnExtremoEn(i) && ap.tieneUnExtremoEn(j)) {

@@ -18,11 +18,7 @@ public class MainInterface {
 
 	private JFrame frame;
 	private JLabel lblTitulo;
-	
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,23 +32,17 @@ public class MainInterface {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public MainInterface() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		lblTitulo = new JLabel("Temible operario del");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(Color.WHITE);
@@ -60,7 +50,7 @@ public class MainInterface {
 		lblTitulo.setFont(new Font("Joystix", Font.PLAIN, 18));
 		lblTitulo.setBounds(10, 64, 400, 38);
 		frame.getContentPane().add(lblTitulo);
-		
+
 		JLabel lblTitulo2 = new JLabel("recontraespionaje");
 		lblTitulo2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo2.setForeground(Color.WHITE);
@@ -68,12 +58,12 @@ public class MainInterface {
 		lblTitulo2.setFont(new Font("Joystix", Font.PLAIN, 18));
 		lblTitulo2.setBounds(10, 113, 400, 14);
 		frame.getContentPane().add(lblTitulo2);
-		
+
 		JButton btnJugar = new JButton("Jugar!");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Juego juego = Juego.iniciarJuego();
-				CargarEspias nombreEspias = new CargarEspias(true,juego);
+				CargarEspias nombreEspias = new CargarEspias(true, juego);
 				frame.setVisible(false);
 			}
 		});

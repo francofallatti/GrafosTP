@@ -17,6 +17,10 @@ public class AGMinimo {
 		return cantVertices;
 	}
 	
+	public List<AristaConPeso> getAristas() {
+		return agm.getAristas();
+	}
+	
 	public void agregarPesoArista(double peso, int i, int j) {
 		agm.agregarPesoArista(peso, i, j);
 	}

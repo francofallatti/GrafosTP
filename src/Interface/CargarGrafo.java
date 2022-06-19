@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -14,15 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.SpinnerModel;
 
-import Main.Espia;
 import Main.Juego;
 import javax.swing.JSpinner;
-import javax.swing.JSlider;
-import javax.swing.JScrollBar;
 import javax.swing.SpinnerNumberModel;
 
 import Grafos.AGMinimo;
@@ -32,9 +24,6 @@ public class CargarGrafo {
 	private JFrame frame;
 	private Juego juego;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,20 +35,12 @@ public class CargarGrafo {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 * 
-	 * @wbp.parser.entryPoint
-	 */
 	public CargarGrafo(boolean b, Juego j) {
 		juego = j;
 		juego.cargarEncuentros();
 		initialize(b);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(boolean b) {
 		frame = new JFrame();
 		frame.setVisible(b);

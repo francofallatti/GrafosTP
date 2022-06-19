@@ -11,13 +11,11 @@ public class Juego {
 	private Map<String, Espia> espias;
 	private Map<Integer, Espia> numeroDeVertice_espia;
 	private Map<Espia, Integer> espia_NumeroDeVertice;
-	private String mensaje;
 	private GrafoConPeso grafoEspias;
 	private AGMinimo juego;
 
 	private Juego() {
 		espias = new HashMap<String, Espia>();
-		mensaje = "Este es un mensaje para los espías";
 		espia_NumeroDeVertice = new HashMap<Espia, Integer>();
 		numeroDeVertice_espia = new HashMap<Integer, Espia>();
 	}
@@ -46,20 +44,6 @@ public class Juego {
 	
 	public AGMinimo jugar() {
 		juego = AGMinimo.prim(grafoEspias);
-		numeroDeVertice_espia.get(0).recibirMensaje(mensaje);
-		for (int i = 0; i < juego.getMatrizConPesos().length; i++) {
-			for (int j = 1; j < juego.getMatrizConPesos().length; j++) {
-				if (i != j && juego.existeArista(i, j)) {
-					if (juego.getMatrizConPesos()[i][j] > 0.7) {
-						numeroDeVertice_espia.get(j).recibirMensaje(null);
-					} else {
-						if (numeroDeVertice_espia.get(i).tieneMensaje()) {
-							numeroDeVertice_espia.get(j).recibirMensaje(mensaje);
-						}
-					}
-				}
-			}
-		}
 		return juego;
 	}
 
@@ -112,10 +96,6 @@ public class Juego {
 
 	public GrafoConPeso getGrafo() {
 		return grafoEspias;
-	}
-
-	public Double getProbabilidadIntercepcion(int i, int j) {
-		return juego.getMatrizConPesos()[i][j];
 	}
 
 	public Espia getEspia(String s) {
