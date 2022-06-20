@@ -10,6 +10,10 @@ public class AristaConPeso {
 		extremo2 = e2;
 		peso = p;
 	}
+	@Override
+	public String toString() {
+		return "Peso:" + peso + "Extr1:" + extremo1 + "Extr2:" + extremo2;
+	}
 
 	public boolean tieneUnExtremoEn(Integer i) {
 		return extremo1 == i || extremo2 == i;

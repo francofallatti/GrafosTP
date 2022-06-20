@@ -18,18 +18,18 @@ public class GrafoConPeso extends Grafo {
 		if (super.existeArista(i, j)) {
 			matrizConPesos[i][j] = peso;
 			matrizConPesos[j][i] = peso;
-			aristas.add(new AristaConPeso(i,j,peso));
+			aristas.add(new AristaConPeso(i, j, peso));
 		}
 
 	}
-	
-	public List<AristaConPeso> getAristas(){
+
+	public List<AristaConPeso> getAristas() {
 		return aristas;
 	}
-	
+
 	private AristaConPeso getArista(int i, int j) {
-		for(AristaConPeso ap : aristas) {
-			if(ap.tieneUnExtremoEn(i) && ap.tieneUnExtremoEn(j)) {
+		for (AristaConPeso ap : aristas) {
+			if (ap.tieneUnExtremoEn(i) && ap.tieneUnExtremoEn(j)) {
 				return ap;
 			}
 		}
@@ -64,29 +64,31 @@ public class GrafoConPeso extends Grafo {
 		}
 		return ret.toString();
 	}
-	public Integer dameAristaMin(int i) {	//retorna el vertice con arista minima con un extremo en i
+
+	public Integer dameAristaMin(int i, List<Integer> visitados) { // retorna el vertice con arista minima con un extremo en i
 		Set<Integer> vecinos = getVecinos(i);
 		Double aristaMin = Double.MAX_VALUE;
 		Integer verticeAsociado = 0;
-		for(Integer v : vecinos) {
-			if(getPesoDeAristas(i, v)<aristaMin) {
+		for (Integer v : vecinos) {
+			if (getPesoDeAristas(i, v) < aristaMin && !visitados.contains(v)) {
 				aristaMin = getPesoDeAristas(i, v);
 				verticeAsociado = v;
 			}
 		}
 		return verticeAsociado;
 	}
-	
+
 	public AristaConPeso dameAristaMin(List<Integer> visitados) {
-			Integer n = 0;
-			while(n<visitados.size()) {
-				if(!visitados.contains(dameAristaMin(visitados.get(n)))) {
-					n=visitados.size();
-					return getArista(visitados.get(n),dameAristaMin(visitados.get(n)));
-				} else {
-					n++;
-				}
+		Integer n = 0;
+		while (n < visitados.size()) {
+			if (!visitados.contains(dameAristaMin(visitados.get(n), visitados))) {
+				AristaConPeso ret = getArista(visitados.get(n), dameAristaMin(visitados.get(n),visitados));
+				n = visitados.size();
+				return ret;
+			} else {
+				n++;
 			}
+		}
 		return null;
 	}
 

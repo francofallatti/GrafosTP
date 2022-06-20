@@ -38,6 +38,8 @@ public class AGMinimo {
 		}
 		else {
 			AristaConPeso aristaMin = g.dameAristaMin(vertVisitados);
+			System.out.println(vertVisitados);
+			System.out.println(aristaMin);
 			agm.agregarPesoArista(aristaMin.getPeso(), aristaMin.getExtremo1(), aristaMin.getExtremo2());
 			if(!vertVisitados.contains(aristaMin.getExtremo1())) {
 				vertVisitados.add(aristaMin.getExtremo1());
