@@ -12,6 +12,10 @@ public class AGMinimo {
 		this.agm = new GrafoConPeso(cantVertices);
 		this.cantVertices = cantVertices;
 	}
+	
+	public void agregarArista(int i, int j) {
+		agm.agregarArista(i, j);
+	}
 
 	public Integer cantVertices() {
 		return cantVertices;
@@ -38,8 +42,7 @@ public class AGMinimo {
 		}
 		else {
 			AristaConPeso aristaMin = g.dameAristaMin(vertVisitados);
-			System.out.println(vertVisitados);
-			System.out.println(aristaMin);
+			agm.agregarArista(aristaMin.getExtremo1(), aristaMin.getExtremo2());
 			agm.agregarPesoArista(aristaMin.getPeso(), aristaMin.getExtremo1(), aristaMin.getExtremo2());
 			if(!vertVisitados.contains(aristaMin.getExtremo1())) {
 				vertVisitados.add(aristaMin.getExtremo1());

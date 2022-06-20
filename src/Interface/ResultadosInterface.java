@@ -74,7 +74,6 @@ public class ResultadosInterface {
 		}
 		
 		table.setModel(model);
-		System.out.println(resultado.toString());
 
 	}
 }
