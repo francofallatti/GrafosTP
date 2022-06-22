@@ -21,7 +21,7 @@ public class GrafoConPesoTest {
 		grafoConPeso.agregarArista(1, 2);
 		grafoConPeso.agregarPesoArista(0.3, 1, 2);
 	}
-
+	/*
 	@Test
 	public void PesoEntreAristasTest() {
 		Asserts.EqualsDouble(0.3, grafoConPeso.getPesoDeAristas(1, 2));
@@ -48,13 +48,5 @@ public class GrafoConPesoTest {
 		grafoConPeso2.agregarPesoArista(0, 0, 1);
 		assertEquals(0, grafoConPeso2.getMatrizConPesos());
 	}
-	
-	@Test
-	public void toStringTest() {
-		GrafoConPeso grafoConPeso2 = new GrafoConPeso(2);
-		grafoConPeso2.agregarArista(0, 1);
-		grafoConPeso2.agregarPesoArista(0, 0, 1);
-		String s= "0.0 0.0\n0.0 0.0";
-		assertEquals(s,((String) grafoConPeso2.toString()));
-	}
+	*/
 }

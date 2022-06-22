@@ -8,7 +8,7 @@ import Grafos.AGMinimo;
 public class AGMTest {
 	
 	private AGMinimo agm;
-	
+	/*
 	@Before 
 	public void SetUp() {
 		agm = new AGMinimo(2);
@@ -23,4 +23,5 @@ public class AGMTest {
 		agm.agregarArista(1, 0);
 		agm.agregarPesoArista(0.3, 1,0);
 	}
+	*/
 }

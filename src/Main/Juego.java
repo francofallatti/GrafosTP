@@ -24,23 +24,6 @@ public class Juego {
 		Juego juego = new Juego();
 		return juego;
 	}
-
-	public boolean operativoExitoso() {
-		boolean ret = true;
-		for(Espia e : espia_NumeroDeVertice.keySet()) {
-			ret = ret && e.tieneMensaje();
-		}
-		return ret;
-	}
-	
-	public String resultado() {
-		if(operativoExitoso()) {
-			return "Operativo realizado de manera exitosa";
-		}
-		else {
-			return "Los espías han sido interceptados";
-		}
-	}
 	
 	public AGMinimo jugar() {
 		juego = AGMinimo.prim(grafoEspias);
@@ -102,10 +85,4 @@ public class Juego {
 		return espias.get(s);
 	}
 
-	public boolean mensajeEntregado(int i) {
-		if(numeroDeVertice_espia.get(i).tieneMensaje()==true){
-			return true;
-		}
-		return false;
-	}
 }

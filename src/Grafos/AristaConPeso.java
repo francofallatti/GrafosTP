@@ -1,6 +1,6 @@
 package Grafos;
 
-public class AristaConPeso {
+public class AristaConPeso implements Comparable<AristaConPeso> {
 	private Integer extremo1;
 	private Integer extremo2;
 	private Double peso;
@@ -9,10 +9,6 @@ public class AristaConPeso {
 		extremo1 = e1;
 		extremo2 = e2;
 		peso = p;
-	}
-	@Override
-	public String toString() {
-		return "Peso:" + peso + "Extr1:" + extremo1 + "Extr2:" + extremo2;
 	}
 
 	public boolean tieneUnExtremoEn(Integer i) {
@@ -29,5 +25,16 @@ public class AristaConPeso {
 
 	public Double getPeso() {
 		return peso;
+	}
+
+	@Override
+	public int compareTo(AristaConPeso o) {
+		if(this.getPeso() > o.getPeso()) {
+			return 1;
+		}
+		if(this.getPeso() < o.getPeso()) {
+			return -1;
+		}
+		return 0;
 	}
 }

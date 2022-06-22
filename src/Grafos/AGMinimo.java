@@ -13,20 +13,27 @@ public class AGMinimo {
 		this.cantVertices = cantVertices;
 	}
 	
-	public void agregarArista(int i, int j) {
+	private void agregarArista(int i, int j) {
 		agm.agregarArista(i, j);
-	}
-
-	public Integer cantVertices() {
-		return cantVertices;
-	}
-	
-	public List<AristaConPeso> getAristas() {
-		return agm.getAristas();
 	}
 	
 	public void agregarPesoArista(double peso, int i, int j) {
 		agm.agregarPesoArista(peso, i, j);
+	}
+	
+	public static AGMinimo kruskal(GrafoConPeso g) {
+		AGMinimo agm = new AGMinimo(g.tamano());
+		List<AristaConPeso> aristasVisitadas = new LinkedList<AristaConPeso>();	//Et
+		return kruskal(agm, g, aristasVisitadas, 1);
+	}
+	
+	private static AGMinimo kruskal(AGMinimo agm, GrafoConPeso g, List<AristaConPeso> aristasVisitadas, int i) {
+		if(i == agm.cantVertices()-1) {
+			return agm;
+		}
+		else {
+			
+		}
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
@@ -36,7 +43,7 @@ public class AGMinimo {
 		return prim(agm, g, vertVisitados);
 	}
 
-	public static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados) {
+	private static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados) {
 		if(vertVisitados.size() == g.tamano()) {
 			return agm;
 		}
@@ -52,6 +59,14 @@ public class AGMinimo {
 			}
 			return prim(agm, g, vertVisitados);
 		}
+	}
+
+	public Integer cantVertices() {
+		return cantVertices;
+	}
+	
+	public List<AristaConPeso> getAristas() {
+		return agm.getAristas();
 	}
 
 }

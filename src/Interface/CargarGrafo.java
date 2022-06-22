@@ -96,7 +96,6 @@ public class CargarGrafo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
-					System.out.println("Espias: " + juego.getEspias());
 					if (comboBox.getSelectedItem().toString().equals(comboBox2.getSelectedItem().toString())) {
 						JOptionPane.showMessageDialog(frame, "Los espías deben ser diferentes!", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -113,7 +112,6 @@ public class CargarGrafo {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AGMinimo resultado = juego.jugar();
-				System.out.println(resultado.toString());
 				ResultadosInterface ri = new ResultadosInterface(true, resultado, juego);
 				frame.setVisible(false);
 			}

@@ -1,5 +1,6 @@
 package Grafos;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class GrafoConPeso extends Grafo {
 
 	public List<AristaConPeso> getAristas() {
 		return aristas;
+	}
+
+	private void ordenarAristas() {
+		Collections.sort(aristas);
 	}
 
 	public AristaConPeso dameAristaMin(List<Integer> visitados) {
