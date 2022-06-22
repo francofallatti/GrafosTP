@@ -19,6 +19,7 @@ public class GrafoConPeso extends Grafo {
 			matrizConPesos[i][j] = peso;
 			matrizConPesos[j][i] = peso;
 			aristas.add(new AristaConPeso(i, j, peso));
+			ordenarAristas();
 		}
 
 	}
@@ -29,6 +30,37 @@ public class GrafoConPeso extends Grafo {
 
 	private void ordenarAristas() {
 		Collections.sort(aristas);
+	}
+/*
+	public AristaConPeso dameSigAristaMin(AristaConPeso arista) {
+		return aristas.get(aristas.indexOf(arista) + 1);
+	}
+*/
+	public AristaConPeso dameAristaMin(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
+		int i = 0;
+		while (i < aristas.size()) { // las aristas estan ordenadas
+			if (aristasVisitadas.contains(aristas.get(i))) {
+				i++;
+			} else {
+				if(!formaCiclo(aristas.get(i), vertVisitados)) {
+					return aristas.get(i);
+				}
+				else {
+					i++;
+				}
+			}
+		}
+		return null;
+	}
+
+	public boolean formaCiclo(AristaConPeso a, List<Integer> vertVisitados) {
+		boolean ret = false;
+		for (Integer vv : vertVisitados) {
+			ret = ret || (BFS.alcanzables(this, a.getExtremo1()).contains(vv)
+					&& BFS.alcanzables(this, a.getExtremo2()).contains(vv));
+		}
+		return ret;
+
 	}
 
 	public AristaConPeso dameAristaMin(List<Integer> visitados) {
