@@ -10,6 +10,10 @@ public class AristaConPeso implements Comparable<AristaConPeso> {
 		extremo2 = e2;
 		peso = p;
 	}
+	
+	public String toString() {
+		return "e1 " + extremo1 + ", e2 " + extremo2 + ", peso " + peso;
+	}
 
 	public boolean tieneUnExtremoEn(Integer i) {
 		return extremo1 == i || extremo2 == i;

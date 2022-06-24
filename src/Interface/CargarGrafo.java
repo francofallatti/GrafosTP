@@ -35,6 +35,9 @@ public class CargarGrafo {
 		});
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public CargarGrafo(boolean b, Juego j) {
 		juego = j;
 		juego.cargarEncuentros();
@@ -87,7 +90,7 @@ public class CargarGrafo {
 		frame.getContentPane().add(lblProbabilidadDeIntercepcion);
 
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 1, 0.1));
+		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 20.0, 1.0));
 		spinner.setBounds(151, 162, 131, 20);
 		frame.getContentPane().add(spinner);
 
