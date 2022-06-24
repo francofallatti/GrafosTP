@@ -57,6 +57,7 @@ public class OpcionAGMInterface {
 		DefaultComboBoxModel<Implementacion> model = new DefaultComboBoxModel<Implementacion>(); 
 		model.addElement(Implementacion.Prim);
 		model.addElement(Implementacion.Kruskal);
+		comboBox.setModel(model);
 		JButton btnVerResultado = new JButton("Ver resultado");
 		btnVerResultado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

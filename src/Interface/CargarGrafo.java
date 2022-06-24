@@ -63,7 +63,7 @@ public class CargarGrafo {
 		comboBox.setBounds(151, 49, 131, 20);
 		frame.getContentPane().add(comboBox);
 		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
-		//espias.addAll(juego.getNombreEspias());
+		espias.addAll(juego.getNombreEspias());
 
 		comboBox.setModel(espias);
 
