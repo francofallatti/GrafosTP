@@ -6,6 +6,7 @@ import java.util.Set;
 
 import Grafos.AGMinimo;
 import Grafos.GrafoConPeso;
+import Grafos.Implementacion;
 
 public class Juego {
 	private Map<String, Espia> espias;
@@ -25,8 +26,12 @@ public class Juego {
 		return juego;
 	}
 	
-	public AGMinimo jugar() {
-		juego = AGMinimo.kruskal(grafoEspias);
+	public AGMinimo jugar(Implementacion i) {
+		if(i == Implementacion.Prim){
+			juego = AGMinimo.prim(grafoEspias);
+		} else {
+			juego = AGMinimo.kruskal(grafoEspias);
+		}
 		return juego;
 	}
 
