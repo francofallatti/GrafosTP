@@ -26,7 +26,7 @@ public class Juego {
 	}
 	
 	public AGMinimo jugar() {
-		juego = AGMinimo.prim(grafoEspias);
+		juego = AGMinimo.kruskal(grafoEspias);
 		return juego;
 	}
 

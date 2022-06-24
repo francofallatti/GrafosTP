@@ -19,7 +19,6 @@ public class GrafoConPeso extends Grafo {
 			matrizConPesos[i][j] = peso;
 			matrizConPesos[j][i] = peso;
 			aristas.add(new AristaConPeso(i, j, peso));
-			//ordenarAristas();
 		}
 	}
 
@@ -27,21 +26,20 @@ public class GrafoConPeso extends Grafo {
 		return aristas;
 	}
 
-	private void ordenarAristas() {
+	public void ordenarAristas() {
 		Collections.sort(aristas);
 	}
-
 	/*
-	 * public AristaConPeso dameSigAristaMin(AristaConPeso arista) { return
-	 * aristas.get(aristas.indexOf(arista) + 1); }
-	 */
-	public AristaConPeso dameAristaMin(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
+	public AristaConPeso dameAristaMinKruskal(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
+		ordenarAristas();
 		int i = 0;
 		while (i < aristas.size()) { // las aristas estan ordenadas
+			System.out.println(aristas.get(i));
 			if (aristasVisitadas.contains(aristas.get(i))) {
 				i++;
 			} else {
 				if (!formaCiclo(aristas.get(i), vertVisitados)) {
+					System.out.println("entro");
 					return aristas.get(i);
 				} else {
 					i++;
@@ -50,13 +48,23 @@ public class GrafoConPeso extends Grafo {
 		}
 		return null;
 	}
-
-	public AristaConPeso dameAristaMinPrim(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
-		//int i = 0;
-		System.out.println(aristas);
+	*/
+	public AristaConPeso dameAristaMinKruskal(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados, AGMinimo agm) {
+		//ordenarAristas();
 		Double aristaMin = Double.MAX_VALUE;
 		AristaConPeso ret = null;
-		
+		for(AristaConPeso a : aristas) {
+			if(a.getPeso() <= aristaMin && !aristasVisitadas.contains(a) && !agm.formaCiclo(a, vertVisitados)) {
+				ret = a;
+				aristaMin = a.getPeso();
+			}
+		}
+		return ret;
+	}
+
+	public AristaConPeso dameAristaMinPrim(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
+		Double aristaMin = Double.MAX_VALUE;
+		AristaConPeso ret = null;
 		for(Integer v : vertVisitados) {
 			if(dameAristaMinVert(v,aristasVisitadas) != null && dameAristaMinVert(v,aristasVisitadas).getPeso() <= aristaMin && !aristasVisitadas.contains(dameAristaMinVert(v,aristasVisitadas)) && !((vertVisitados.contains(dameAristaMinVert(v,aristasVisitadas).getExtremo1())
 					&& vertVisitados.contains(dameAristaMinVert(v,aristasVisitadas).getExtremo2())))) {
@@ -64,30 +72,12 @@ public class GrafoConPeso extends Grafo {
 				ret = dameAristaMinVert(v,aristasVisitadas);
 			}
 		}
-		/*
-		while (i < aristas.size()) { // las aristas estan ordenadas
-			System.out.println(aristas.get(i));
-			if (aristasVisitadas.contains(aristas.get(i))) {
-				i++;
-			} else {
-				if (aristas.get(i).getPeso() < aristaMin && ((!vertVisitados.contains(aristas.get(i).getExtremo1())
-						&& vertVisitados.contains(aristas.get(i).getExtremo2()))
-						|| (vertVisitados.contains(aristas.get(i).getExtremo1())
-								&& !vertVisitados.contains(aristas.get(i).getExtremo2())))) {
-					ret = aristas.get(i);
-					aristaMin = aristas.get(i).getPeso();
-					i++;
-				} else {
-					i++;
-				}
-			}
-		}
-		*/
 		return ret;
 		
 	}
 	
-	public AristaConPeso dameAristaMinVert(Integer v, List<AristaConPeso> aristasVisitadas) {	//devuelve la aristaMin con un extremo en v
+	//devuelve la aristaMin con un extremo en v
+	private AristaConPeso dameAristaMinVert(Integer v, List<AristaConPeso> aristasVisitadas) {	
 		AristaConPeso ret = null;
 		Double aristaMin = Double.MAX_VALUE;
 		for(AristaConPeso a : aristas) {
@@ -102,20 +92,9 @@ public class GrafoConPeso extends Grafo {
 	public boolean formaCiclo(AristaConPeso a, List<Integer> vertVisitados) {
 		boolean ret = false;
 		for (Integer vv : vertVisitados) {
-			ret = ret || (BFS.alcanzables(this, a.getExtremo1()).contains(vv)
-					&& BFS.alcanzables(this, a.getExtremo2()).contains(vv));
+			ret = ret || (BFS.alcanzables(this, vv).contains(a.getExtremo1())
+					&& BFS.alcanzables(this, vv).contains(a.getExtremo2()));
 		}
 		return ret;
-
 	}
-	/*
-	 * public AristaConPeso dameAristaMin(List<Integer> visitados) { AristaConPeso
-	 * ret = null; Double aristaMin = Double.MAX_VALUE; for (AristaConPeso ap :
-	 * aristas) { if (ap.getPeso() < aristaMin &&
-	 * ((!visitados.contains(ap.getExtremo1()) &&
-	 * visitados.contains(ap.getExtremo2())) ||
-	 * (visitados.contains(ap.getExtremo1()) &&
-	 * !visitados.contains(ap.getExtremo2())))) { ret = ap; aristaMin =
-	 * ap.getPeso(); } } return ret; }
-	 */
 }

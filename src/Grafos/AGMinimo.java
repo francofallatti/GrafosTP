@@ -13,15 +13,15 @@ public class AGMinimo extends GrafoConPeso {
 		AGMinimo agm = new AGMinimo(g.tamano());
 		List<AristaConPeso> aristasVisitadas = new LinkedList<AristaConPeso>(); // Et
 		List<Integer> vertVisitados = new LinkedList<Integer>();
-		return kruskal(agm, g, aristasVisitadas, vertVisitados, 1);
+		return kruskal(agm, g, aristasVisitadas, vertVisitados);
 	}
 
 	private static AGMinimo kruskal(AGMinimo agm, GrafoConPeso g, List<AristaConPeso> aristasVisitadas,
-			List<Integer> vertVisitados, Integer i) {
-		if (i == g.tamano()) {
+			List<Integer> vertVisitados) {
+		if (vertVisitados.size() == g.tamano() && BFS.esConexo(agm)) {
 			return agm;
 		} else {
-			AristaConPeso aristaMin = g.dameAristaMin(aristasVisitadas, vertVisitados);
+			AristaConPeso aristaMin = g.dameAristaMinKruskal(aristasVisitadas, vertVisitados, agm);
 			agm.agregarArista(aristaMin.getExtremo1(), aristaMin.getExtremo2());
 			agm.agregarPesoArista(aristaMin.getPeso(), aristaMin.getExtremo1(), aristaMin.getExtremo2());
 			aristasVisitadas.add(aristaMin);
@@ -31,20 +31,19 @@ public class AGMinimo extends GrafoConPeso {
 			if (!vertVisitados.contains(aristaMin.getExtremo2())) {
 				vertVisitados.add(aristaMin.getExtremo2());
 			}
-			return kruskal(agm, g, aristasVisitadas, vertVisitados, i++);
+			return kruskal(agm, g, aristasVisitadas, vertVisitados);
 		}
 	}
 
 	public static AGMinimo prim(GrafoConPeso g) {
 		AGMinimo agm = new AGMinimo(g.tamano());
 		List<AristaConPeso> aristasVisitadas = new LinkedList<AristaConPeso>(); // Et
-		List<Integer> vertVisitados = new LinkedList<Integer>();
+		List<Integer> vertVisitados = new LinkedList<Integer>(); // Vt
 		vertVisitados.add(0);
-		System.out.println(agm.tamano());
-		return prim(agm, g, vertVisitados, 1, aristasVisitadas);
+		return prim(agm, g, vertVisitados, aristasVisitadas);
 	}
 
-	private static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados,	Integer i, List<AristaConPeso> av) {
+	private static AGMinimo prim(AGMinimo agm, GrafoConPeso g, List<Integer> vertVisitados, List<AristaConPeso> av) {
 		if (vertVisitados.size() == g.tamano() && BFS.esConexo(agm)) {
 			return agm;
 		} else {
@@ -58,7 +57,7 @@ public class AGMinimo extends GrafoConPeso {
 			if (!vertVisitados.contains(aristaMin.getExtremo2())) {
 				vertVisitados.add(aristaMin.getExtremo2());
 			}
-			return prim(agm, g, vertVisitados, vertVisitados.size(), av);
+			return prim(agm, g, vertVisitados, av);
 		}
 	}
 
