@@ -9,7 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 import Grafos.AGMinimo;
-import Grafos.GrafoConPeso;
 import Grafos.Implementacion;
 import Main.Juego;
 
@@ -31,10 +30,7 @@ public class OpcionAGMInterface {
 			}
 		});
 	}
-
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	public OpcionAGMInterface(boolean b, Juego j) {
 		juego = j;
 		initialize(b);

@@ -15,7 +15,7 @@ public class Grafo {
 			_listaDeVecinos.add(new HashSet<Integer>());
 		}
 	}
-	
+
 	public Grafo() {
 		_listaDeVecinos = new ArrayList<HashSet<Integer>>();
 	}
@@ -23,7 +23,7 @@ public class Grafo {
 	public void agregarVertice() {
 		_listaDeVecinos.add(new HashSet<Integer>());
 	}
-	
+
 	public void agregarArista(int i, int j) {
 		verifDistintos(i, j);
 		verifVertice(i);

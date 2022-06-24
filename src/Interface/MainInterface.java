@@ -43,23 +43,14 @@ public class MainInterface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		lblTitulo = new JLabel("Temible operario del");
+		lblTitulo = new JLabel("Temible operario del recontraespionaje");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setBackground(Color.WHITE);
-		lblTitulo.setFont(new Font("Joystix", Font.PLAIN, 18));
-		lblTitulo.setBounds(10, 64, 400, 38);
+		lblTitulo.setBounds(10, 74, 414, 38);
 		frame.getContentPane().add(lblTitulo);
 
-		JLabel lblTitulo2 = new JLabel("recontraespionaje");
-		lblTitulo2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo2.setForeground(Color.WHITE);
-		lblTitulo2.setBackground(Color.WHITE);
-		lblTitulo2.setFont(new Font("Joystix", Font.PLAIN, 18));
-		lblTitulo2.setBounds(10, 113, 400, 14);
-		frame.getContentPane().add(lblTitulo2);
-
-		JButton btnJugar = new JButton("Jugar!");
+		JButton btnJugar = new JButton("Comenzar!");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Juego juego = Juego.iniciarJuego();
@@ -67,7 +58,7 @@ public class MainInterface {
 				frame.setVisible(false);
 			}
 		});
-		btnJugar.setBounds(167, 184, 89, 23);
+		btnJugar.setBounds(159, 123, 109, 23);
 		frame.getContentPane().add(btnJugar);
 	}
 }

@@ -29,32 +29,13 @@ public class GrafoConPeso extends Grafo {
 	public void ordenarAristas() {
 		Collections.sort(aristas);
 	}
-	/*
-	public AristaConPeso dameAristaMinKruskal(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
-		ordenarAristas();
-		int i = 0;
-		while (i < aristas.size()) { // las aristas estan ordenadas
-			System.out.println(aristas.get(i));
-			if (aristasVisitadas.contains(aristas.get(i))) {
-				i++;
-			} else {
-				if (!formaCiclo(aristas.get(i), vertVisitados)) {
-					System.out.println("entro");
-					return aristas.get(i);
-				} else {
-					i++;
-				}
-			}
-		}
-		return null;
-	}
-	*/
-	public AristaConPeso dameAristaMinKruskal(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados, AGMinimo agm) {
-		//ordenarAristas();
+
+	public AristaConPeso dameAristaMinKruskal(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados,
+			AGMinimo agm) {
 		Double aristaMin = Double.MAX_VALUE;
 		AristaConPeso ret = null;
-		for(AristaConPeso a : aristas) {
-			if(a.getPeso() <= aristaMin && !aristasVisitadas.contains(a) && !agm.formaCiclo(a, vertVisitados)) {
+		for (AristaConPeso a : aristas) {
+			if (a.getPeso() <= aristaMin && !aristasVisitadas.contains(a) && !agm.formaCiclo(a, vertVisitados)) {
 				ret = a;
 				aristaMin = a.getPeso();
 			}
@@ -65,23 +46,26 @@ public class GrafoConPeso extends Grafo {
 	public AristaConPeso dameAristaMinPrim(List<AristaConPeso> aristasVisitadas, List<Integer> vertVisitados) {
 		Double aristaMin = Double.MAX_VALUE;
 		AristaConPeso ret = null;
-		for(Integer v : vertVisitados) {
-			if(dameAristaMinVert(v,aristasVisitadas) != null && dameAristaMinVert(v,aristasVisitadas).getPeso() <= aristaMin && !aristasVisitadas.contains(dameAristaMinVert(v,aristasVisitadas)) && !((vertVisitados.contains(dameAristaMinVert(v,aristasVisitadas).getExtremo1())
-					&& vertVisitados.contains(dameAristaMinVert(v,aristasVisitadas).getExtremo2())))) {
-				aristaMin = dameAristaMinVert(v,aristasVisitadas).getPeso();
-				ret = dameAristaMinVert(v,aristasVisitadas);
+		for (Integer v : vertVisitados) {
+			if (dameAristaMinVert(v, aristasVisitadas) != null
+					&& dameAristaMinVert(v, aristasVisitadas).getPeso() <= aristaMin
+					&& !aristasVisitadas.contains(dameAristaMinVert(v, aristasVisitadas))
+					&& !((vertVisitados.contains(dameAristaMinVert(v, aristasVisitadas).getExtremo1())
+							&& vertVisitados.contains(dameAristaMinVert(v, aristasVisitadas).getExtremo2())))) {
+				aristaMin = dameAristaMinVert(v, aristasVisitadas).getPeso();
+				ret = dameAristaMinVert(v, aristasVisitadas);
 			}
 		}
 		return ret;
-		
+
 	}
-	
-	//devuelve la aristaMin con un extremo en v
-	private AristaConPeso dameAristaMinVert(Integer v, List<AristaConPeso> aristasVisitadas) {	
+
+	// devuelve la aristaMin con un extremo en v
+	private AristaConPeso dameAristaMinVert(Integer v, List<AristaConPeso> aristasVisitadas) {
 		AristaConPeso ret = null;
 		Double aristaMin = Double.MAX_VALUE;
-		for(AristaConPeso a : aristas) {
-			if(a.tieneUnExtremoEn(v) && a.getPeso() <= aristaMin && !aristasVisitadas.contains(a)) {
+		for (AristaConPeso a : aristas) {
+			if (a.tieneUnExtremoEn(v) && a.getPeso() <= aristaMin && !aristasVisitadas.contains(a)) {
 				ret = a;
 				aristaMin = a.getPeso();
 			}

@@ -16,13 +16,18 @@ import javax.swing.JOptionPane;
 import Main.Juego;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
-
-import Grafos.AGMinimo;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 
 public class CargarGrafo {
 
 	private JFrame frame;
 	private Juego juego;
+	private DefaultTableModel modeloTabla;
+	private JTable table;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,11 +39,9 @@ public class CargarGrafo {
 			}
 		});
 	}
-
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	public CargarGrafo(boolean b, Juego j) {
+		modeloTabla = new DefaultTableModel();
 		juego = j;
 		juego.cargarEncuentros();
 		initialize(b);
@@ -53,14 +56,13 @@ public class CargarGrafo {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblEspiasAEncontrarse = new JLabel("Espias a encontrarse:");
+		lblEspiasAEncontrarse.setBounds(151, 10, 163, 14);
 		lblEspiasAEncontrarse.setForeground(Color.WHITE);
 		lblEspiasAEncontrarse.setBackground(Color.WHITE);
-		lblEspiasAEncontrarse.setFont(new Font("Joystix", Font.PLAIN, 12));
-		lblEspiasAEncontrarse.setBounds(140, 24, 163, 14);
 		frame.getContentPane().add(lblEspiasAEncontrarse);
 
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(151, 49, 131, 20);
+		comboBox.setBounds(48, 26, 131, 20);
 		frame.getContentPane().add(comboBox);
 		DefaultComboBoxModel<String> espias = new DefaultComboBoxModel<String>();
 		espias.addAll(juego.getNombreEspias());
@@ -68,35 +70,50 @@ public class CargarGrafo {
 		comboBox.setModel(espias);
 
 		JComboBox<String> comboBox2 = new JComboBox<String>();
-		comboBox2.setBounds(151, 80, 131, 20);
+		comboBox2.setBounds(246, 26, 131, 20);
 		frame.getContentPane().add(comboBox2);
 		DefaultComboBoxModel<String> espias2 = new DefaultComboBoxModel<String>();
 		espias2.addAll(juego.getNombreEspias());
 		comboBox2.setModel(espias2);
 
 		JButton btnGuardar = new JButton("Guardar Encuentro");
+		btnGuardar.setBounds(151, 98, 131, 23);
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnGuardar.setBounds(151, 193, 131, 23);
 		frame.getContentPane().add(btnGuardar);
 
-		JButton btnFinalizar = new JButton("Finalizar");
+		JButton btnFinalizar = new JButton("Cargar encuentros");
 		btnFinalizar.setBounds(293, 227, 131, 23);
 		frame.getContentPane().add(btnFinalizar);
 
-		JLabel lblProbabilidadDeIntercepcion = new JLabel("probabilidad de intercepcion:");
+		JLabel lblProbabilidadDeIntercepcion = new JLabel("Probabilidad de intercepcion:");
+		lblProbabilidadDeIntercepcion.setBounds(137, 48, 217, 14);
 		lblProbabilidadDeIntercepcion.setForeground(Color.WHITE);
-		lblProbabilidadDeIntercepcion.setFont(new Font("Joystix", Font.PLAIN, 11));
 		lblProbabilidadDeIntercepcion.setBackground(Color.WHITE);
-		lblProbabilidadDeIntercepcion.setBounds(111, 137, 217, 14);
 		frame.getContentPane().add(lblProbabilidadDeIntercepcion);
 
 		JSpinner spinner = new JSpinner();
+		spinner.setBounds(171, 73, 86, 20);
 		spinner.setModel(new SpinnerNumberModel(0.0, 0.0, 20.0, 1.0));
-		spinner.setBounds(151, 162, 131, 20);
 		frame.getContentPane().add(spinner);
-
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(48, 138, 329, 78);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		DefaultTableColumnModel mt = new DefaultTableColumnModel();
+		table.setColumnModel(mt);
+		modeloTabla.addColumn("Espia 1");
+		modeloTabla.addColumn("Espia 2");
+		modeloTabla.addColumn("Probabilidad de intercepción");
+		table.setModel(modeloTabla);
+		table.getColumnModel().getColumn(0).setPreferredWidth(32);
+		table.getColumnModel().getColumn(1).setPreferredWidth(32);
+		table.getColumnModel().getColumn(2).setPreferredWidth(135);
+		
 		btnGuardar.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnGuardar) {
@@ -106,8 +123,8 @@ public class CargarGrafo {
 					} else {
 						juego.agregarEncuentro((Double) spinner.getValue(), comboBox.getSelectedItem().toString(),
 								comboBox2.getSelectedItem().toString());
-						System.out.println("Espias a encontrarse: " + comboBox.getSelectedItem().toString() + "y"
-								+ comboBox2.getSelectedItem().toString());
+						modeloTabla.addRow(new String[] {comboBox.getSelectedItem().toString(),
+								comboBox2.getSelectedItem().toString(), spinner.getValue().toString()});
 					}
 				}
 			}
@@ -115,8 +132,13 @@ public class CargarGrafo {
 
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				OpcionAGMInterface ii = new OpcionAGMInterface(true, juego);
-				frame.setVisible(false);
+				if(!juego.sePuedeCrearAGM()) {
+					JOptionPane.showMessageDialog(frame, "El grafo debe ser conexo!", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					OpcionAGMInterface ii = new OpcionAGMInterface(true, juego);
+					frame.setVisible(false);
+				}
 			}
 		});
 

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import Grafos.AGMinimo;
+import Grafos.BFS;
 import Grafos.GrafoConPeso;
 import Grafos.Implementacion;
 
@@ -25,14 +26,18 @@ public class Juego {
 		Juego juego = new Juego();
 		return juego;
 	}
-	
+
 	public AGMinimo jugar(Implementacion i) {
-		if(i == Implementacion.Prim){
+		if (i == Implementacion.Prim) {
 			juego = AGMinimo.prim(grafoEspias);
 		} else {
 			juego = AGMinimo.kruskal(grafoEspias);
 		}
 		return juego;
+	}
+	
+	public boolean sePuedeCrearAGM() {
+		return BFS.esConexo(grafoEspias);
 	}
 
 	public void cargarEncuentros() {
@@ -80,10 +85,6 @@ public class Juego {
 
 	public Set<Espia> getEspias() {
 		return espia_NumeroDeVertice.keySet();
-	}
-
-	public GrafoConPeso getGrafo() {
-		return grafoEspias;
 	}
 
 	public Espia getEspia(String s) {
