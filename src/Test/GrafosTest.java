@@ -87,7 +87,6 @@ public class GrafosTest {
 		vecinoSet.add(1);
 		vecinoSet.add(2);
 		vecinoSet.add(3);
-
 		assertNotEquals(vecinoSet, grafo.getVecinos(0));
 	}
 

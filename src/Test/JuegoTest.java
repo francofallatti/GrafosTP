@@ -2,10 +2,11 @@ package Test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import Grafos.GrafoConPeso;
 import Main.Espia;
 import Main.Juego;
 
@@ -17,16 +18,13 @@ public class JuegoTest {
 	
 	@Before 
 	public void SetUp() {
-		juego = juego.iniciarJuego();
-		GrafoConPeso grafoEspias = new GrafoConPeso(5);
-		juego.agregarEspia("Espia1");	
-		juego.agregarEspia("Espia2");	
-		juego.cargarEncuentros();
-		juego.agregarEncuentro(8.0, "Espia1", "Espia2");
-		juego.jugar();
+		juego = Juego.iniciarJuego();
 		espia1 = new Espia("Espia1");
-		espia2 = new Espia("Espia1");
-		
+		espia2 = new Espia("Espia2");
+		juego.agregarEspia(espia1.getNombre());	
+		juego.agregarEspia(espia2.getNombre());	
+		juego.cargarEncuentros();
+		juego.agregarEncuentro(8.0, espia1.getNombre(), espia2.getNombre());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -34,26 +32,10 @@ public class JuegoTest {
 		juego.agregarEspia(null);
 		juego.agregarEspia("");
 	}
-	@Test
-	public void puedenEncontrarseTest() {
-		assertFalse(juego.puedenEncontrarse(espia1, espia2));
-	}
 	
 	@Test
 	public void getEspiasTest() {
-		Juego juego2 = juego.iniciarJuego();
-		assertEquals(juego2.getEspias(), null);
-	}
-	
-	
-	
-	@Test
-	public void getEspiasKeyTest() {
-		
-	}
-	
-	@Test
-	public void getGrafoTest() {
-		
+		Juego juego2 = Juego.iniciarJuego();
+		assertEquals(juego2.getEspias(), new HashSet<Espia>());
 	}
 }

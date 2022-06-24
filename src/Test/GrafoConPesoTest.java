@@ -1,15 +1,12 @@
 package Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import Grafos.Grafo;
 import Grafos.GrafoConPeso;
-import Test.Asserts;
 
 public class GrafoConPesoTest {
 
@@ -21,7 +18,7 @@ public class GrafoConPesoTest {
 		grafoConPeso.agregarArista(1, 2);
 		grafoConPeso.agregarPesoArista(0.3, 1, 2);
 	}
-	/*
+	
 	@Test
 	public void PesoEntreAristasTest() {
 		Asserts.EqualsDouble(0.3, grafoConPeso.getPesoDeAristas(1, 2));
@@ -33,20 +30,15 @@ public class GrafoConPesoTest {
 	}
 
 	@Test
-	public void getPesosDeAristasTest() {
-		double[] pesos = new double[] { 0.3 };
-		assertEquals(pesos, grafoConPeso.getPesosDeAristas(1));
-	}
-	@Test
 	public void getPesosDeAristasNotEqualsTest() {
 		assertNotEquals(0.4,grafoConPeso.getPesosDeAristas(1));
 	}
 	@Test
-	public void getMatrizConPesosTest() {
+	public void pesosTest() {
 		GrafoConPeso grafoConPeso2 = new GrafoConPeso(2);
 		grafoConPeso2.agregarArista(0, 1);
 		grafoConPeso2.agregarPesoArista(0, 0, 1);
-		assertEquals(0, grafoConPeso2.getMatrizConPesos());
+		assertTrue(grafoConPeso2.getPesoDeAristas(0, 1) == 0);
 	}
-	*/
+	
 }

@@ -1,5 +1,6 @@
 package Grafos;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -80,5 +81,33 @@ public class GrafoConPeso extends Grafo {
 					&& BFS.alcanzables(this, vv).contains(a.getExtremo2()));
 		}
 		return ret;
+	}
+	
+	public double[][] getMatrizConPesos() {
+		return matrizConPesos;
+	}
+	
+	public double[] getPesosDeAristas(int i) {
+		return matrizConPesos[i];
+	}
+	
+	public double getPesoDeAristas(int i,int j) {
+		return matrizConPesos[i][j];
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		GrafoConPeso other = (GrafoConPeso) obj;
+		if (aristas == null) {
+			if (other.aristas != null)
+				return false;
+		} 
+		if (!Arrays.deepEquals(matrizConPesos, other.matrizConPesos))
+			return false;
+		return true;
 	}
 }
